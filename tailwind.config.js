@@ -9,7 +9,8 @@ export default {
     colors:{
       primary: "#3563E9",
       secondary: "#54A6FF",
-      accent:"#90A3BF",  
+      accent:"#90A3BF",
+      icon: "#596780"  
     }
   },
   plugins: [],

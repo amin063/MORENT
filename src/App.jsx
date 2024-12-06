@@ -5,7 +5,7 @@ import AppRoutes from "./routes/AppRoutes"
 function App() {
 
   return (
-    <div className="w-[90%] m-auto">
+    <div>
       <BrowserRouter>
         <AppRoutes />
       </BrowserRouter>
