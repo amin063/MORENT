@@ -18,31 +18,42 @@ function Footer() {
   ]
   return (
     <div className='w-[90%] m-auto'>
-      
-    <div className='flex justify-between'>
-      {/* LEFT LOGO */}
-      <div className='w-[30%]'>
-        <Link to={"/"} className='text-primary font-bold text-[32px]'>MORENT</Link>
-        <p className='text-[16px] text-[#13131399]'>Our vision is to provide convenience and help increase your sales business.</p>
+
+      <div className='flex flex-wrap gap-10 justify-between'>
+        {/* LEFT LOGO */}
+        <div className='lg:w-[30%]'>
+          <Link to={"/"} className='text-primary font-bold text-[32px]'>MORENT</Link>
+          <p className='text-[16px] text-[#13131399] mt-5'>Our vision is to provide convenience and help increase your sales business.</p>
+        </div>
+
+        {/* RIGHT LINKS */}
+        <div className='flex flex-wrap gap-10 '>
+          {
+            menu.map((item) => {
+              return (
+                <div key={item.name}>
+                  <h3 className='font-bold text-[20px] mb-[20px]'>{item.name}</h3>
+                  <ul className='flex flex-col gap-5'>
+                    {item.links.map((item) => <li className='text-[#13131399]'>{item}</li>)}
+                  </ul>
+                </div>
+              )
+            })
+          }
+        </div>
       </div>
 
-      {/* RIGHT LINKS */}
-      <div className='flex gap-10 '>
-        {
-          menu.map((item) => {
-            return (
-              <div key={item.name}>
-                <h3 className='font-bold text-[20px] mb-[20px]'>{item.name}</h3>
-                <ul>
-                  {item.links.map((item) => <li className='text-[#13131399]'>{item}</li>)}
-                </ul>
-              </div>
-            )
-          })
-        }
+
+      <hr className='my-10 border-accent' />
+
+      <div className='flex flex-wrap gap-8 justify-between font-bold mb-10'>
+        <div>©2022 MORENT. All rights reserved</div>
+        <div className='flex gap-10'>
+          <div>Privacy & Policy</div>
+          <div>Terms & Condition</div>
+        </div>
       </div>
-    </div>
-    <hr className=''/>
+
     </div>
   )
 }
