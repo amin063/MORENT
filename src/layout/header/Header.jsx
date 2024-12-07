@@ -12,7 +12,7 @@ const Navbar = () => {
         </div>
 
         {/* Arama Kutusu */}
-        <div className="relative flex items-center w-[34.53%] max-w-[280px] hidden md:flex">
+        <div className="relative  items-center w-[34.53%] max-w-[280px] hidden md:flex">
           <input
             type="text"
             placeholder="Search something here"
@@ -27,8 +27,8 @@ const Navbar = () => {
 
         {/* İkonlar */}
         <div className="flex items-center space-x-6">
-          <FaHeart className="text-gray-500 text-icon text-lg w-[20px] h-[20px] hover:text-primary cursor-pointer transition duration-200" />
-          <FaCog className="text-gray-500 text-icon text-lg w-[20px] h-[20px] hover:text-primary cursor-pointer transition duration-200" />
+          <FaHeart className="text-icon text-lg w-[20px] h-[20px] hover:text-primary cursor-pointer transition duration-200" />
+          <FaCog className="text-icon text-lg w-[20px] h-[20px] hover:text-primary cursor-pointer transition duration-200" />
           <img
             src={logo}
             alt="Profile"
