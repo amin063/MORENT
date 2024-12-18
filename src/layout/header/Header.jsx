@@ -1,10 +1,10 @@
 import { FaSearch, FaHeart, FaBell, FaCog } from "react-icons/fa";
-import serachIcon from "../../assets/images/icons/search-normal.png";
-import logo from "../../assets/images/logo/Profil.png";
+import serachIcon from "../../assets/icons/search-normal.png";
+import logo from '../../assets/images/logo/Profil.png'
 
 const Navbar = () => {
   return (
-    <div className="w-full shadow">
+    <div className="w-full shadow bg-white">
       <div className="flex items-center w-[90%] mx-auto justify-between bg-white text-primary h-[100px]">
         {/* Logo */}
         <div className="text-2xl font-bold text-blue-600 cursor-pointer">
