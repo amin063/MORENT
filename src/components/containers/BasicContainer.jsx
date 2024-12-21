@@ -3,7 +3,7 @@ import BasicCart from '../cart/BasicCart'
 
 function BasicContainer() {
   return (
-      <div className='flex w-[100%] flex-wrap mb-[100px]'>
+      <div className='flex w-[100%] flex-wrap justify-center items-center col-span-10 px-5  md:col-span-8 mb-[100px]'>
         <BasicCart />
         <BasicCart />
         <BasicCart />

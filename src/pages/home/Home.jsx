@@ -1,16 +1,10 @@
 import React from "react";
-import BasicCart from "../../components/cart/BasicCart";
 import BasicContainer from "../../components/containers/BasicContainer";
-import Switch from "../../components/switch/Switch";
-import IntroCart from "../../components/cart/IntroCart";
+import Sidebar from "../../components/sidebar/Sidebar";
 function Home() {
   return (
-    <div className="w-[90%] m-auto">
-      <IntroCart/>
-      <Switch />
-      <p className="text-[16px] text-accent my-5">Popular Car</p>
-      <BasicContainer />
-      <p className="text-[16px] text-accent my-5">Recommendend Car</p>
+    <div className="h-full grid grid-cols-10 gap-10 relative">
+      <Sidebar />
       <BasicContainer />
     </div>
   );

@@ -36,7 +36,7 @@ function BasicCart() {
   };
 
   return (
-    <div className="w-[100%] sm:w-[50%] lg:w-[33%] xl:w-[25%] pt-4 pr-4 pb-4">
+    <div className="w-[100%] sm:w-[50%] lg:w-[33%] pt-10 pr-10 pb-10">
       <div className="flex flex-col gap-9 bg-white p-5 rounded-md">
         {/* HEADER */}
         <div>
