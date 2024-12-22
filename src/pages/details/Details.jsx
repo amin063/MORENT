@@ -1,8 +1,11 @@
 import React from 'react'
+import CarDetails from './carDetails/CarDetails'
 
 function Details() {
   return (
-    <div>Details</div>
+    <div>
+      <CarDetails/>
+    </div>
   )
 }
 
