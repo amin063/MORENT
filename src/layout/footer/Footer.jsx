@@ -17,7 +17,7 @@ function Footer() {
   }
   ]
   return (
-    <div className='w-[90%] m-auto'>
+    <div className='w-[90%] m-auto pt-10'>
 
       <div className='flex flex-wrap gap-10 justify-between'>
         {/* LEFT LOGO */}

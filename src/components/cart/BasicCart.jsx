@@ -7,37 +7,29 @@ import BasicBtn from "../button/BasicBtn";
 
 function BasicCart() {
   const [isLiked, setIsLiked] = useState(false);
-  const [animationClass, setAnimationClass] = useState(""); // Animasyon durumu
+  const [animationClass, setAnimationClass] = useState("");
 
   const likedIcon = (
-    <FaHeart
-      className={`text-[20px] text-red-600 ${animationClass}`}
-    />
+    <FaHeart className={`text-[20px] text-red-600 ${animationClass}`} />
   );
   const unLikedIcon = (
-    <FaRegHeart
-      className={`text-[20px] text-accent ${animationClass}`}
-    />
+    <FaRegHeart className={`text-[20px] text-accent ${animationClass}`} />
   );
 
   const setLike = () => {
-    // Animasyon sınıfını ayarla
     if (isLiked) {
-      setAnimationClass("animate-shrink"); // Unlike animasyonu
+      setAnimationClass("animate-shrink");
     } else {
-      setAnimationClass("animate-pop"); // Like animasyonu
+      setAnimationClass("animate-pop");
     }
 
-    // Animasyonu sıfırla
     setTimeout(() => setAnimationClass(""), 300);
-
-    // Like/Unlike durumunu güncelle
     setIsLiked(!isLiked);
   };
 
   return (
-    <div className="w-[100%] sm:w-[50%] lg:w-[33%] pt-10 pr-10 pb-10">
-      <div className="flex flex-col gap-9 bg-white p-5 rounded-md">
+    <div className="w-full max-w-[280px] pt-5 flex">
+      <div className="flex flex-col gap-5 bg-white p-5 rounded-md shadow-md">
         {/* HEADER */}
         <div>
           <div className="flex justify-between items-center">
@@ -47,10 +39,14 @@ function BasicCart() {
           <p className="text-accent font-bold text-[14px]">Sport</p>
         </div>
         {/* IMAGE */}
-        <img src={car} alt="" />
+        <img
+          src={car}
+          alt="Car"
+          className="w-full  object-cover rounded-md"
+        />
 
         {/* DETAIL */}
-        <div className="flex justify-between items-center text-accent">
+        <div className="flex justify-between items-center text-accent text-[14px]">
           <div className="flex gap-1 items-center">
             <BsFillFuelPumpFill />
             90L
@@ -60,11 +56,13 @@ function BasicCart() {
             Manual
           </div>
           <div className="flex gap-1 items-center">
-            <BsFillFuelPumpFill />2 People
+            <BsFillFuelPumpFill />
+            2 People
           </div>
         </div>
+
         {/* BUY */}
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <p className="font-bold">
             $99.00 / <span className="text-accent text-[14px]">day</span>
           </p>

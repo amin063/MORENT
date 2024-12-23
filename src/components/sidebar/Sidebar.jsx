@@ -7,7 +7,7 @@ const Sidebar = ({ isMenu, setIsMenu }) => {
     return (
         <div className={`${isMenu ? "hidden" : "flex"} h-[100%] flex flex-col gap-10 px-5 absolute left-0 bg-white md:static md:col-span-2 md:flex`}>
             {/* TYPE */}
-            <div className='flex flex-col gap-5'>
+            <div className='flex flex-col gap-5 mt-10'>
                 <p className='text-accent'>TYPE</p>
                 {
                     fakeList.map(item =>

@@ -8,7 +8,7 @@ import BasicBtn from '../../../components/button/BasicBtn';
 
 const CarDetails = () => {
     return (
-        <div className='grid grid-rows-2 gap-5 md:grid-cols-2 w-[90%] max-w-[1120px] m-auto mt-10'>
+        <div className='grid grid-rows-1 gap-5 md:grid-cols-2 w-[90%] max-w-[1120px] m-auto mt-10'>
             {/* THUBNAILS */}
             <div className='grid gap-10 grid-rows-3'>
                 <div className='row-span-2 flex justify-center items-center border'><img className='rounded-md' src={image3} /></div>

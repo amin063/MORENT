@@ -1,35 +1,59 @@
-import React from 'react'
-import BasicCart from '../../../../components/cart/BasicCart'
-import { Swiper, SwiperSlide } from "swiper/react"
+import React from "react";
+import BasicCart from "../../../../components/cart/BasicCart";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "./style.css";
-import { Pagination } from 'swiper/modules';
+import { Pagination } from "swiper/modules";
+
 const CarSwiper = () => {
-    return (
-        <div>
-          <Swiper
-        slidesPerView={4}
-        centeredSlides={true}
-        spaceBetween={30}
+  return (
+    <div className="w-full">
+      <Swiper
+        spaceBetween={20} // Slide'lar arasındaki boşluk
         grabCursor={true}
         pagination={{
           clickable: true,
         }}
         modules={[Pagination]}
         className="mySwiper"
+        breakpoints={{
+          // Mobil cihazlar
+          0: {
+            slidesPerView: 1, // 1 kart görünsün
+          },
+          // Tablet cihazlar
+          768: {
+            slidesPerView: 3, // 2 kart görünsün
+          },
+          // Laptop ve üzeri
+          1024: {
+            slidesPerView: 4, // 3 kart görünsün
+          },
+          // Büyük ekranlar
+          1440: {
+            slidesPerView: 5, // 5 kart görünsün
+          },
+        }}
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
+        {/* Kartlar */}
+        <SwiperSlide>
+          <BasicCart />
+        </SwiperSlide>
+        <SwiperSlide>
+          <BasicCart />
+        </SwiperSlide>
+        <SwiperSlide>
+          <BasicCart />
+        </SwiperSlide>
+        <SwiperSlide>
+          <BasicCart />
+        </SwiperSlide>
+        <SwiperSlide>
+          <BasicCart />
+        </SwiperSlide>
       </Swiper>
-        </div>
-    )
-}
+    </div>
+  );
+};
 
-export default CarSwiper
+export default CarSwiper;
