@@ -1,5 +1,5 @@
 import React from 'react'
-import CheckInput from '../inputs/CheckInput'
+import CheckInput from '../../../components/inputs/CheckInput'
 import BasicBtn from '../../../components/button/BasicBtn'
 import { AiOutlineSafety } from "react-icons/ai";
 

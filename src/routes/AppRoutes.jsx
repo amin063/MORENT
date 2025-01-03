@@ -4,6 +4,8 @@ import UserLayout from '../layout/UserLayout'
 import Home from '../pages/home/Home'
 import Details from '../pages/details/Details'
 import Payment from '../pages/payment/Payment'
+import Login from '../pages/auth/login/Login'
+import Register from '../pages/auth/register/Register'
 
 function AppRoutes() {
     return (
@@ -14,6 +16,8 @@ function AppRoutes() {
                     <Route path='details' element={<Details />} />
                     <Route path='payment' element={<Payment />} />
                 </Route>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
             </Routes>
         </div>
     )

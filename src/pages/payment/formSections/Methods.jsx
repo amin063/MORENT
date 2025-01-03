@@ -1,5 +1,5 @@
 import React from 'react'
-import FormInput from '../inputs/FormInput'
+import FormInput from '../../../components/inputs/FormInput'
 import visa from '../../../assets/images/Visa.png'
 import blueIcon from '../../../assets/icons/pick.svg'
 
