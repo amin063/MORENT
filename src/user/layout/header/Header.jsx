@@ -1,6 +1,6 @@
 import { FaSearch, FaHeart, FaBell, FaCog } from "react-icons/fa";
-import serachIcon from "../../assets/icons/search-normal.png";
-import logo from '../../assets/images/logo/Profil.png'
+import serachIcon from "../../../assets/icons/search-normal.png";
+import logo from '../../../assets/images/logo/Profil.png'
 
 const Navbar = () => {
   return (

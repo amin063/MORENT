@@ -1,7 +1,7 @@
 import React from 'react'
 import FormInput from '../../../components/inputs/FormInput'
-import visa from '../../../assets/images/Visa.png'
-import blueIcon from '../../../assets/icons/pick.svg'
+import visa from '../../../../assets/images/Visa.png'
+import blueIcon from '../../../../assets/icons/pick.svg'
 
 const Method = () => {
     return (

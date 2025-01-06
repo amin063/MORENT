@@ -1,5 +1,5 @@
 import React from 'react'
-import car from '../../../assets/images/image3.jpg'
+import car from '../../../../assets/images/image3.jpg'
 
 const BillMain = () => {
     return (

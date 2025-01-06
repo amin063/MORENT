@@ -1,11 +1,12 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import UserLayout from '../layout/UserLayout'
-import Home from '../pages/home/Home'
-import Details from '../pages/details/Details'
-import Payment from '../pages/payment/Payment'
-import Login from '../pages/auth/login/Login'
-import Register from '../pages/auth/register/Register'
+
+import UserLayout from '../user/layout/UserLayout'
+import Home from '../user/pages/home/Home'
+import Details from '../user/pages/details/Details'
+import Payment from '../user/pages/payment/Payment'
+import Login from '../user/pages/auth/login/Login'
+import Register from '../user/pages/auth/register/Register'
 
 function AppRoutes() {
     return (

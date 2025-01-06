@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
-import car from "../../assets/images/car.png";
+import car from "../../../assets/images/car.png";
 import { BsFillFuelPumpFill } from "react-icons/bs";
 import BasicBtn from "../button/BasicBtn";
 
