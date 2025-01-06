@@ -28,7 +28,7 @@ function BasicCart() {
   };
 
   return (
-    <div className="w-full max-w-[280px] pt-5 flex">
+    <div className="w-full max-w-[280px] max-h-[300px] pt-5 flex">
       <div className="flex flex-col gap-5 bg-white p-5 rounded-md shadow-md">
         {/* HEADER */}
         <div>
