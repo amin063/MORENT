@@ -5,7 +5,7 @@ const Sidebar = ({ isMenu, setIsMenu }) => {
     const fakeList = ["Sport  (10)", "SUV  (12)", "MPV  (16)", "Sedan  (20)", "Coupe  (14)", "Hatchback  (14)"]
     const fakeList1 = ["2 Person  (10)", "4 Person  (14)", "6 Person  (12)", "8 or More  (16)"]
     return (
-        <div className={`${isMenu ? "hidden" : "flex"}  flex flex-col gap-10 px-5 absolute left-0 bg-white md:static md:col-span-2 md:flex max-w-[1120px]`}>
+        <div className={`${isMenu ? "hidden" : "flex"} flex flex-col h-full gap-10 px-5 absolute left-0 bg-white md:static md:col-span-2 md:flex max-w-[500px]`}>
             {/* TYPE */}
             <div className='flex flex-col gap-5 mt-10'>
                 <p className='text-accent'>TYPE</p>

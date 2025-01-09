@@ -5,9 +5,11 @@ import MenuBtn from "../../components/button/MenuBtn";
 function Home() {
   const [isMenu, setIsMenu] = useState(false);
   return (
-    <div className={`h-full grid grid-cols-10 gap-10 relative `}>
+    <div className={`h-full w-full grid grid-cols-10 gap-10 relative `}>
       <Sidebar isMenu={isMenu} setIsMenu={setIsMenu} />
-      <BasicContainer />
+      <div className="col-span-10 md:col-span-8">
+        <BasicContainer />
+      </div>
       <MenuBtn isMenu={isMenu} setIsMenu={setIsMenu} />
     </div>
   );

@@ -5,7 +5,7 @@ import Navbar from "./header/Header";
 
 function UserLayout() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-screen w-full max-w-[2000px] m-auto">
       <Navbar />
       <main className="flex-grow">
         <Outlet />

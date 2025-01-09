@@ -10,7 +10,6 @@ import Register from '../user/pages/auth/register/Register'
 
 function AppRoutes() {
     return (
-        <div>
             <Routes>
                 <Route path='/' element={<UserLayout />}>
                     <Route index element={<Home />} />
@@ -20,7 +19,6 @@ function AppRoutes() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
             </Routes>
-        </div>
     )
 }
 
