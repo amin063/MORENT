@@ -2,9 +2,14 @@ import React from 'react'
 import CheckInput from '../../../components/inputs/CheckInput'
 import BasicBtn from '../../../components/button/BasicBtn'
 import { AiOutlineSafety } from "react-icons/ai";
+import { rentCar } from '../../../../services/carServices';
 
-const Confirmation = () => {
+const Confirmation = ({_id, days }) => {
     const confirmations = ['I agree with sending an Marketing and newsletter emails. No spam, promissed!', 'I agree with our terms and conditions and privacy policy.']
+    const rentNow = async () => {
+        const res = await rentCar({_id, days})
+        console.log(res);
+    }
     return (
         <div className='bg-white flex flex-col gap-5 p-5 rounded-md'>
             {/* HEADER */}
@@ -23,7 +28,7 @@ const Confirmation = () => {
             </div>
             {/* BUTTON */}
             <div>
-                <BasicBtn />
+            <button onClick={rentNow} className='bg-primary text-white py-1 px-2 rounded-md'>Rent</button>
             </div>
             {/* INFO SECURITY */}
             <div className='flex flex-col gap-3'>

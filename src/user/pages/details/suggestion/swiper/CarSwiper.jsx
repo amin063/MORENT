@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BasicCart from "../../../../components/cart/BasicCart";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "./style.css";
 import { Pagination } from "swiper/modules";
+import { getCars } from "../../../../../services/carServices";
 
 const CarSwiper = () => {
+  const [cars, setCars] = useState([])
+  useEffect(() => {
+    getCars().then(res => setCars(res.carLists))
+  }, [])
+  
   return (
     <div className="w-full">
       <Swiper
-        spaceBetween={20} // Slide'lar arasındaki boşluk
+        spaceBetween={20}
         grabCursor={true}
         pagination={{
           clickable: true,
@@ -17,40 +23,27 @@ const CarSwiper = () => {
         modules={[Pagination]}
         className="mySwiper"
         breakpoints={{
-          // Mobil cihazlar
           0: {
-            slidesPerView: 1, // 1 kart görünsün
+            slidesPerView: 1,
           },
-          // Tablet cihazlar
           768: {
-            slidesPerView: 3, // 2 kart görünsün
+            slidesPerView: 3,
           },
-          // Laptop ve üzeri
           1024: {
-            slidesPerView: 4, // 3 kart görünsün
+            slidesPerView: 4,
           },
-          // Büyük ekranlar
           1440: {
-            slidesPerView: 5, // 5 kart görünsün
+            slidesPerView: 5,
           },
         }}
       >
         {/* Kartlar */}
-        <SwiperSlide>
-          <BasicCart />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BasicCart />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BasicCart />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BasicCart />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BasicCart />
-        </SwiperSlide>
+        {
+          cars.filter(car => car.isActive).map(car => (
+            <SwiperSlide key={car._id}>
+              <BasicCart {...car} />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );

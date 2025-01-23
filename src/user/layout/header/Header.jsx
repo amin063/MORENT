@@ -1,8 +1,20 @@
 import { FaSearch, FaHeart, FaBell, FaCog } from "react-icons/fa";
 import serachIcon from "../../../assets/icons/search-normal.png";
-import logo from '../../../assets/images/logo/Profil.png'
+import logo from '../../../assets/images/logo/Profil.png';
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from 'react'
+import { getUser } from '../../../services/userServices'
+import { setUser } from '../../../redux/slices/userSlice'
 
 const Navbar = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    getUser().then(res => {
+      dispatch(setUser(res))
+    })
+  }, [])
+
+  const { user } = useSelector((state) => state.user);
   return (
     <div className="w-full shadow bg-white">
       <div className="flex items-center w-[90%] mx-auto justify-between bg-white text-primary h-[100px]">
@@ -29,11 +41,12 @@ const Navbar = () => {
         <div className="flex items-center space-x-6">
           <FaHeart className="text-icon text-lg w-[20px] h-[20px] hover:text-primary cursor-pointer transition duration-200" />
           <FaCog className="text-icon text-lg w-[20px] h-[20px] hover:text-primary cursor-pointer transition duration-200" />
-          <img
+          <p className="font-bold border p-2 cursor-pointer">{user ? user.username : "Login"}</p>
+          {/* <img
             src={logo}
             alt="Profile"
             className="w-10 h-10 rounded-full cursor-pointer object-cover"
-          />
+          /> */}
         </div>
       </div>
     </div>

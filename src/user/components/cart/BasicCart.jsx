@@ -5,7 +5,10 @@ import car from "../../../assets/images/car.png";
 import { BsFillFuelPumpFill } from "react-icons/bs";
 import BasicBtn from "../button/BasicBtn";
 
-function BasicCart() {
+function BasicCart(carData) {
+  console.log(carData);
+  
+  
   const [isLiked, setIsLiked] = useState(false);
   const [animationClass, setAnimationClass] = useState("");
 
@@ -33,10 +36,10 @@ function BasicCart() {
         {/* HEADER */}
         <div>
           <div className="flex justify-between items-center">
-            <p className="font-bold text-[20px]">Koenigsegg</p>
+            <p className="font-bold text-[20px]">{carData.name}</p>
             <div onClick={setLike}>{isLiked ? likedIcon : unLikedIcon}</div>
           </div>
-          <p className="text-accent font-bold text-[14px]">Sport</p>
+          <p className="text-accent font-bold text-[14px]">{carData.type}</p>
         </div>
         {/* IMAGE */}
         <img
@@ -49,24 +52,24 @@ function BasicCart() {
         <div className="flex justify-between items-center text-accent text-[14px]">
           <div className="flex gap-1 items-center">
             <BsFillFuelPumpFill />
-            90L
+            {carData.fuelCapacity}L
           </div>
           <div className="flex gap-1 items-center">
             <BsFillFuelPumpFill />
-            Manual
+            {carData.driveType}
           </div>
           <div className="flex gap-1 items-center">
             <BsFillFuelPumpFill />
-            2 People
+            {carData.capacity} People
           </div>
         </div>
 
         {/* BUY */}
         <div className="flex justify-between items-center">
           <p className="font-bold">
-            $99.00 / <span className="text-accent text-[14px]">day</span>
+            ${carData.price} / <span className="text-accent text-[14px]">day</span>
           </p>
-          <BasicBtn />
+          <BasicBtn path={`/details/${carData._id}`} />
         </div>
       </div>
     </div>

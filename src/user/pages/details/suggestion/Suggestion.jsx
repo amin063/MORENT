@@ -5,17 +5,17 @@ const Suggestion = () => {
   return (
     <div className="w-[90%] mx-[auto]">
       {/* RentCar */}
-      <div className="">
+      {/* <div className="">
         <div className="w-[70%] md:w-[98%] mx-[auto] flex justify-between mt-10">
           <h4 className="text-[16px] text-accent">Recent Car</h4>
           <Link>View All</Link>
         </div>
         <Swiper />
-      </div>
+      </div> */}
       {/* recomendationCar */}
-      <div className="">
+      <div>
       <div className="w-[70%] md:w-[98%] mx-[auto] flex justify-between mt-10">
-          <h4>Recomendation Car</h4>
+          <h4 className="text-[16px] text-accent">Recomendation Car</h4>
           <Link>View All</Link>
         </div>
         <Swiper />

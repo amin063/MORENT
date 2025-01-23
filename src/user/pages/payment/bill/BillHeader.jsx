@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BillHeader = () => {
+const BillHeader = (car) => {
     return (
         <div>
             <h3 className='font-bold'>Rental Summary</h3>

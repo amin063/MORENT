@@ -13,8 +13,8 @@ function AppRoutes() {
             <Routes>
                 <Route path='/' element={<UserLayout />}>
                     <Route index element={<Home />} />
-                    <Route path='details' element={<Details />} />
-                    <Route path='payment' element={<Payment />} />
+                    <Route path='details/:id' element={<Details />} />
+                    <Route path='payment/:id' element={<Payment />} />
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
