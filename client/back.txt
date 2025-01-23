@@ -1,0 +1,17 @@
+🟢1{
+    login
+    register
+}
+🟢2{
+    addCar
+    getCars
+    getCarDetails
+    filterCars
+}
+?3{
+    getUser
+    uptadeCardDetails
+    carActive-carDeactive
+    deleteCar
+    
+}
