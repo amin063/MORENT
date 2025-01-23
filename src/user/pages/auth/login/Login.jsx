@@ -28,7 +28,7 @@ const Login = () => {
             setError(res.message)
         } else {
             dispatch(setUser(res))
-            console.log(res)
+            console.log(res + "error")
             navigate('/')
         }
         
