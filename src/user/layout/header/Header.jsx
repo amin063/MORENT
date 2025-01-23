@@ -1,18 +1,29 @@
 import { FaSearch, FaHeart, FaBell, FaCog } from "react-icons/fa";
+import { useNavigate } from "react-router-dom"; // Yönlendirme için import ediyoruz
 import serachIcon from "../../../assets/icons/search-normal.png";
-import logo from '../../../assets/images/logo/Profil.png'
+import logo from "../../../assets/images/logo/Profil.png";
 
 const Navbar = () => {
+  const navigate = useNavigate(); // Yönlendirme fonksiyonu
+
+  // Ana sayfaya yönlendirme fonksiyonu
+  const handleLogoClick = () => {
+    navigate("/"); // Ana sayfaya yönlendirir
+  };
+
   return (
     <div className="w-full shadow bg-white">
       <div className="flex items-center w-[90%] mx-auto justify-between bg-white text-primary h-[100px]">
         {/* Logo */}
-        <div className="text-2xl font-bold text-blue-600 cursor-pointer">
+        <div
+          className="text-2xl font-bold text-blue-600 cursor-pointer"
+          onClick={handleLogoClick} // Logo tıklama olayını ekliyoruz
+        >
           MORENT
         </div>
 
         {/* Arama Kutusu */}
-        <div className="relative  items-center w-[34.53%] max-w-[280px] hidden md:flex">
+        <div className="relative items-center w-[34.53%] max-w-[280px] hidden md:flex">
           <input
             type="text"
             placeholder="Search something here"

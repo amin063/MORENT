@@ -2,21 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-  
+
 body {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    background-color: #F6F7F9;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: #f6f7f9;
 }
 
 input {
-    outline: none;
+  outline: none;
 }
 
 input::placeholder {
-    font-size: 10px;
+  font-size: 10px;
 }
