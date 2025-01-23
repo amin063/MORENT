@@ -1,0 +1,15 @@
+.swiper {
+  width: 100%;
+  padding: 20px 0;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide > div {
+  width: 90%; /* Kart genişliği */
+  max-width: 300px; /* Maksimum genişlik */
+}
