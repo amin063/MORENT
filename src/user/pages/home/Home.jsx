@@ -12,7 +12,8 @@ function Home() {
       setCars(res.carLists)
     })()
   }, [])
-  console.log(cars)
+  console.log(cars);
+  
   return (
     <div className={`h-full w-full grid grid-cols-10 gap-10 relative `}>
       <Sidebar cars={cars} setCars={setCars} isMenu={isMenu} setIsMenu={setIsMenu} />

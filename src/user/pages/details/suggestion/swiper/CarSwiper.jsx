@@ -39,7 +39,7 @@ const CarSwiper = () => {
       >
         {/* Kartlar */}
         {
-          cars.filter(car => car.isActive).map(car => (
+          cars.filter(car => !car.rentDay).map(car => (
             <SwiperSlide key={car._id}>
               <BasicCart {...car} />
             </SwiperSlide>

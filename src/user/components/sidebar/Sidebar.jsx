@@ -3,20 +3,29 @@ import { filterCars } from '../../../services/carServices'
 
 const Sidebar = ({ isMenu, setIsMenu, cars, setCars }) => {
     const [filterData, setFilterData] = useState({})
-    // BU SEHIFEDE KI KODLAR SADECE FRONT UCUN YAZILIB VE DATA HEC YERDEN GETIRILMIR. API OLDUQDAN SONRA KOD STRUKTURU DEYISECEK UJIS
-    const fakeList = ["Sport  (10)", "SUV  (12)", "MPV  (16)", "Sedan  (20)", "Coupe  (14)", "Hatchback  (14)"]
-    const fakeList1 = ["2 Person  (10)", "4 Person  (14)", "6 Person  (12)", "8 or More  (16)"]
+    const [price, setPrice] = useState(100)
+    const fakeList = ["SUV", "Sedan", "Hatchback", "Coupe", "Van", "Wagon",]
+    const fakeList1 = ["2", "4", "6", "8"]
     const handleFilter = async (e) => {
         setFilterData((prevData) => {
-            const {name , value , checked} = e.target
-            if(checked){
-                
+            const { name, value, checked } = e.target;
+            if (checked) {
+                return { ...prevData, [name]: [...(prevData[name] || []), value] };
+            } else {
+                return { ...prevData, [name]: prevData[name].filter((item) => item !== value) };
             }
-            
-        })
-        // const res = await filterCars({...filterData, [e.target.name]: e.target.value})
+        });
     }
-    console.log(filterData);
+
+        const searchCar = async () => {
+            const { type, capacity } = filterData
+            const res = await filterCars({ type, capacity, price })
+            console.log(res);
+            setCars(res.cars)
+        }
+    console.log(cars + " sidebar cars");
+    
+
     return (
         <div className={`${isMenu ? "hidden" : "flex"} flex flex-col h-full gap-10 px-5 absolute left-0 bg-white md:static md:col-span-2 md:flex max-w-[500px]`}>
             {/* TYPE */}
@@ -42,7 +51,7 @@ const Sidebar = ({ isMenu, setIsMenu, cars, setCars }) => {
                     (
                         <label key={index} className='flex gap-1 text-[#596780]' htmlFor="">
                             <input name="capacity" value={item} onChange={handleFilter} type="checkbox" />
-                            {item}
+                            {item} Person
                         </label>
                     )
                     )
@@ -53,15 +62,22 @@ const Sidebar = ({ isMenu, setIsMenu, cars, setCars }) => {
                 <p className='text-accent'>PRICE</p>
                 <label htmlFor="">
                     <input
-                        onChange={filterCars}
+                        onChange={(e) => setPrice(e.target.value)}
                         className='bg-blue-[#3563E9]'
+                        min={100}
+                        max={300}
+                        value={price}
                         type="range" />
-                    <p className='text-[#596780] font-semibold'>Max. $100.00</p>
-
+                    <p className='text-[#596780] font-semibold'>{price}$ / day</p>
                 </label>
-
             </div>
-
+            {/* BTN */}
+            <input
+                onClick={searchCar}
+                className='bg-primary text-white py-1 px-2 rounded-md cursor-pointer'
+                type="submit"
+                value={'Search'}
+            />
         </div>
     )
 }
