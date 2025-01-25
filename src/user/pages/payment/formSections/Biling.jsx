@@ -1,7 +1,10 @@
 import React from 'react'
 import FormInput from '../../../components/inputs/FormInput'
 
-const Biling = () => {
+const Biling = ({formData, setFormData}) => {
+    const handleInputChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
+    }
     return (
         <div className='bg-white p-5 rounded-md'>
             {/* HEADER */}
@@ -15,12 +18,12 @@ const Biling = () => {
             {/* INPUTS */}
             <div className='flex flex-col gap-10 justify-between md:flex-row'>
                 <div className='flex flex-col gap-5 w-[100%]'>
-                    <FormInput label={"Name"} placeholder={"Your name"} />
-                    <FormInput label={"Address"} placeholder={"Address"} />
+                    <FormInput onChange={handleInputChange} name={"name"} label={"Name"} placeholder={"Your name"} />
+                    <FormInput onChange={handleInputChange} name={"address"} label={"Address"} placeholder={"Address"} />
                 </div>
                 <div className='flex flex-col gap-5 w-[100%]'>
-                    <FormInput label={"Phone Number"} placeholder={"Phone number"} />
-                    <FormInput label={"Town/City"} placeholder={"Town city"} />
+                    <FormInput onChange={handleInputChange} name={"number"} label={"Phone Number"} placeholder={"Phone number"} />
+                    <FormInput onChange={handleInputChange} name={"city"} label={"Town/City"} placeholder={"Town city"} />
                 </div>
             </div>
         </div>

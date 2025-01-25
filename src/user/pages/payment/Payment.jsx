@@ -12,7 +12,17 @@ import { getCarDetails } from '../../../services/carServices'
 function Payment() {
   const [carData, setCarData] = useState({})
   const [days, setDays] = useState(1)
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState({
+        name: '',
+        address: '',
+        number: '',
+        city: '',
+        cardNumber: '',
+        cardHolder: '',
+        cardDate: '',
+        cardCvc: '',
+        confirmation: false
+  })
     const { id } = useParams()
     useEffect(() => {
         (async () => {
@@ -24,9 +34,9 @@ function Payment() {
     <div className='w-[90%] my-5 mx-auto max-w-[1120px] flex flex-col gap-5 lg:flex-row'>
       {/* FORM */}
       <div className='flex flex-col gap-5'>
-        <Biling />
-        <Method />
-        <Confirmation days={days} {...carData}/>
+        <Biling formData={formData} setFormData={setFormData} />
+        <Method formData={formData} setFormData={setFormData} />
+        <Confirmation days={days} {...carData} formData={formData} setFormData={setFormData}/>
       </div>
       {/* BILL */}
       <div className='bg-white p-5 flex flex-col gap-5 self-start'>

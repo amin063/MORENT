@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import car from "../../../assets/images/car.png";
 import { BsFillFuelPumpFill } from "react-icons/bs";
 import BasicBtn from "../button/BasicBtn";
+import { useSelector } from "react-redux";
+import { addToFav } from "../../../services/carServices";
 
 function BasicCart(carData) {
-  console.log(carData);
-  
-  
+  const [data, setData] = useState({
+    userId: "",
+    carId: "",
+  })
+  const sel = useSelector((state) => state.user);
+  const { user } = sel
+
+
+
+
+  // console.log(carData)
+  // console.log(data)
+  // const getFav = async () => {
+  //   const res = await getFavCars({ userId })
+  // }
   const [isLiked, setIsLiked] = useState(false);
   const [animationClass, setAnimationClass] = useState("");
 
@@ -19,8 +33,29 @@ function BasicCart(carData) {
     <FaRegHeart className={`text-[20px] text-accent ${animationClass}`} />
   );
 
-  const setLike = () => {
-    if (isLiked) {
+  useEffect(() => {
+
+    if (user && user._id && carData._id) {
+      if (user.favList.includes(carData._id)) {
+        setIsLiked(true);
+      }
+      setData({
+        ...data,
+        userId: user._id,
+        carId: carData._id,
+      });
+    }
+  }, [user, carData]);
+
+  const setLike = async () => {
+    setData({
+      ...data,
+      userId: user._id,
+      carId: carData._id,
+    })
+    const res = await addToFav(data)
+    console.log(res)
+    if (res.message === 'Maşın favoritlərə əlavə edildi') {
       setAnimationClass("animate-shrink");
     } else {
       setAnimationClass("animate-pop");

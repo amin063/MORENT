@@ -18,6 +18,7 @@ import Inbox from "../admin/pages/inbox/inbox";
 import Calendar from "../admin/pages/calendar/calendar";
 import Settings from "../admin/pages/settings/settings";
 import HelpCenter from "../admin/pages/helpCenter/helpCenter";
+import FavCars from "../user/pages/favCars/FavCars";
 
 function AppRoutes() {
     return (
@@ -27,6 +28,7 @@ function AppRoutes() {
                 <Route index element={<Home />} />
                 <Route path='details/:id' element={<Details />} />
                 <Route path='payment/:id' element={<Payment />} />
+                <Route path='favCars' element={<FavCars />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

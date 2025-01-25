@@ -11,6 +11,8 @@ const Navbar = () => {
   useEffect(() => {
     getUser().then(res => {
       dispatch(setUser(res))
+      console.log(res + " disNav");
+      
     })
   }, [])
 

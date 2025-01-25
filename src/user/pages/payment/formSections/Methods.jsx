@@ -3,7 +3,10 @@ import FormInput from '../../../components/inputs/FormInput'
 import visa from '../../../../assets/images/Visa.png'
 import blueIcon from '../../../../assets/icons/pick.svg'
 
-const Method = () => {
+const Method = ({formData, setFormData}) => {
+    const handleInputChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
+    }
     return (
         <div className='bg-white p-5 rounded-md'>
             {/* HEADER */}
@@ -27,12 +30,12 @@ const Method = () => {
                 {/* INPUTS */}
                 <div className='flex flex-col gap-10 md:flex-row'>
                     <div className='flex flex-col gap-5 w-[100%]'>
-                        <FormInput color='[white]' label={"Name"} placeholder={"Your name"} />
-                        <FormInput color='[white]' label={"Address"} placeholder={"Address"} />
+                        <FormInput onChange={handleInputChange} name={"cardNumber"} color='[white]' label={"Card Number"} placeholder={"Card number"} />
+                        <FormInput onChange={handleInputChange} name={"cardHolder"} color='[white]' label={"Card Holder"} placeholder={"Card holder"} />
                     </div>
                     <div className='flex flex-col gap-5 w-[100%]'>
-                        <FormInput color='[white]' label={"Phone Number"} placeholder={"Phone number"} />
-                        <FormInput color='[white]' label={"Town/City"} placeholder={"Town city"} />
+                        <FormInput onChange={handleInputChange} name={"cardDate"} color='[white]' label={"Experation date"} type='date' />
+                        <FormInput onChange={handleInputChange} name={"cardCvc"} color='[white]' label={"CVC"} placeholder={"CVC"} />
                     </div>
                 </div>
 

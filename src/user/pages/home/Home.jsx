@@ -18,8 +18,13 @@ function Home() {
     <div className={`h-full w-full grid grid-cols-10 gap-10 relative `}>
       <Sidebar cars={cars} setCars={setCars} isMenu={isMenu} setIsMenu={setIsMenu} />
       <div className="col-span-10 md:col-span-8">
-        <BasicContainer cars={cars} />
-      </div>
+        {
+          cars.length ?
+          <BasicContainer cars={cars} />
+          :
+          <p>Masin tapilmadi</p>
+        }
+        </div>
       <MenuBtn isMenu={isMenu} setIsMenu={setIsMenu} />
     </div>
   );

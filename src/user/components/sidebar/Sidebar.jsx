@@ -18,10 +18,13 @@ const Sidebar = ({ isMenu, setIsMenu, cars, setCars }) => {
     }
 
         const searchCar = async () => {
-            const { type, capacity } = filterData
-            const res = await filterCars({ type, capacity, price })
-            console.log(res);
-            setCars(res.cars)
+            try {
+                const { type, capacity } = filterData
+                const res = await filterCars({ type, capacity, price })
+                setCars(res.cars)                
+            } catch (error) {
+                setCars([])
+            }
         }
     console.log(cars + " sidebar cars");
     
