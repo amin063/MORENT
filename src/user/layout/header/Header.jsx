@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react'
 import { getUser } from '../../../services/userServices'
 import { setUser } from '../../../redux/slices/userSlice'
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch()
@@ -12,14 +13,14 @@ const Navbar = () => {
     getUser().then(res => {
       dispatch(setUser(res))
       console.log(res + " disNav");
-      
+
     })
   }, [])
 
   const { user } = useSelector((state) => state.user);
   return (
     <div className="w-full shadow bg-white">
-      <div className="flex items-center w-[90%] mx-auto justify-between bg-white text-primary h-[100px]">
+      <div className="flex items-center w-[85%] mx-auto justify-between bg-white text-primary h-[100px]">
         {/* Logo */}
         <div className="text-2xl font-bold text-blue-600 cursor-pointer">
           MORENT
@@ -40,15 +41,27 @@ const Navbar = () => {
         </div>
 
         {/* İkonlar */}
-        <div className="flex items-center space-x-6">
-          <FaHeart className="text-icon text-lg w-[20px] h-[20px] hover:text-primary cursor-pointer transition duration-200" />
-          <FaCog className="text-icon text-lg w-[20px] h-[20px] hover:text-primary cursor-pointer transition duration-200" />
-          <p className="font-bold border p-2 cursor-pointer">{user ? user.username : "Login"}</p>
-          {/* <img
-            src={logo}
-            alt="Profile"
-            className="w-10 h-10 rounded-full cursor-pointer object-cover"
-          /> */}
+        <div className="relative group z-50">
+          <p className="font-bold border p-2 cursor-pointer hover:bg-gray-100 transition duration-200 rounded">
+            {user ? user.username : "Login"}
+          </p>
+          <div className="absolute top-full left-0 w-48 bg-white shadow-lg rounded-lg mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+            <div className="flex flex-col p-2">
+              {user && (
+                <>
+                  <Link to={'/favCars'} href="/profile" className="px-2 w-[80%] py-2 hover:bg-gray-100 rounded-lg transition duration-200">
+                    Favorite
+                  </Link>
+                  <a href="/settings" className="px-2 py-2 w-[80%] hover:bg-gray-100 rounded-lg transition duration-200">
+                    Theme
+                  </a>
+                  <a href="/logout" className="px-2 py-2 w-[80%] hover:bg-gray-100 rounded-lg transition duration-200 text-red-500">
+                    Logout
+                  </a>
+                </>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>

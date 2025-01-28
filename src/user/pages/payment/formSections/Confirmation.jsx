@@ -1,20 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AiOutlineSafety } from "react-icons/ai";
 import { rentCar } from '../../../../services/carServices';
+import InfoBox from '../../../components/cart/InfoBox';
 
-const Confirmation = ({ _id, days, formData, setFormData }) => {
+const Confirmation = ({formData, setFormData }) => {
+    const [isMessage, setIsMessage] = useState(false)
+    const [mes, setMes] = useState('')
     const confirmation =  'I agree with our terms and conditions and privacy policy.'
     const rentNow = async () => {
-        const res = await rentCar({ _id, days })
+        const res = await rentCar( formData )
         console.log(res);
+        if(res.status === "OK"){
+            setIsMessage(true)
+            setMes("Maşın uğurla kiralandı. Qarajdan maşını götürə bilərsiniz.")
+        }else{
+            setIsMessage(true)
+            setMes(res.data.message)
+        }
     }
     const handleChecked = (e) => {
         setFormData({...formData, [e.target.name]: e.target.checked})
         
     }
-    console.log(formData);
     return (
+        
+        
         <div className='bg-white flex flex-col gap-5 p-5 rounded-md'>
+            <InfoBox title={"Bildirim🔔"} message={mes} isOpen={isMessage} setIsOpen={setIsMessage}/>
             {/* HEADER */}
             <div className='flex justify-between items-center my-5'>
                 <div>

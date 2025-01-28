@@ -19,8 +19,12 @@ export const getCarDetails = async (id) => {
 }
 
 export const rentCar = async (data) => {
-    const res = await api.post('/rent', data)
-    return res
+    try {
+        const res = await api.post('/rent', data)
+        return res.data
+    } catch (error) {
+        return error.response
+    }
 }
 
 export const filterCars = async (query) => {

@@ -2,7 +2,8 @@
 const InfoBox = ({ title, message, btnTxt = 'Ok', isOpen, setIsOpen }) => {
     return (
         isOpen &&
-        <div className='bg-white border border-primary rounded-lg p-6 fixed w-[50%] h-[50%] shadow-2xl flex justify-between flex-col'>
+        <div className='bg-white border border-primary rounded-lg p-6 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] shadow-2xl flex justify-between flex-col'>
+
             <div className='flex flex-col gap-4'>
                 <h1 className='text-primary font-bold text-3xl'>{title}</h1>
                 <p className='text-gray-600'>{message}</p>

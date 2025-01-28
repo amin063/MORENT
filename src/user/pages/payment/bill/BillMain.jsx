@@ -1,13 +1,22 @@
 import React from 'react'
 import car from '../../../../assets/images/image3.jpg'
 
-const BillMain = ({name, days, setDays}) => {
+const BillMain = ({ setFormData, formData, name, days, setDays }) => {
     const daysIncrement = () => {
-        setDays(days + 1)
+        setDays((prevDays) => {
+            const newDays = prevDays + 1;
+            setFormData({ ...formData, ["rentDay"]: newDays });
+            return newDays;
+        });
+
     }
     const daysDecrement = () => {
         if (days > 1) {
-            setDays(days - 1)
+            setDays((prevDays) => {
+                const newDays = prevDays - 1;
+                setFormData({ ...formData, ["rentDay"]: newDays });
+                return newDays
+            })
         }
     }
     return (
