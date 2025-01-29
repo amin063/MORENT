@@ -15,25 +15,24 @@ const CarDetails = () => {
             const res = await getCarDetails(id)
             setCarData(res.car)
         })()
-
-    }, [])
+        window.scrollTo(0 , 0)
+    }, [id])
 
     return (
         <div className='grid grid-rows-1 gap-5 md:grid-cols-2 w-[90%] max-w-[1120px] m-auto mt-10'>
             {/* THUBNAILS */}
             <div className='grid gap-10 grid-rows-3'>
-                <div className='row-span-2 flex justify-center items-center border'><img className='rounded-md' src={image1} /></div>
-                <div className='row-span-1 gap-5 grid grid-cols-3'>
+                <div className='row-span-3 flex justify-center items-center border'><img className='rounded-md' src={image1} /></div>
+                {/* <div className='row-span-1 gap-5 grid grid-cols-3'>
                     <div className='flex justify-center items-center border-2 border-primary rounded-md'><img className='rounded-md' src={image3} /></div>
                     <div className='flex justify-center items-center border'><img className='rounded-md' src={image2} /></div>
                     <div className='flex justify-center items-center border'><img className='rounded-md' src={image1} /></div>
-                </div>
+                </div> */}
             </div>
             {/* INFO */}
             <div className='bg-white flex flex-col justify-between gap-5 p-5'>
                 <div className='flex justify-between'>
                     <h1 className='font-bold text-2xl'>{carData.name}</h1>
-                    <FaHeart className='text-red-600' />
                 </div>
                 {/* INFO */}
                 <p className='text-accent'>{carData.desc}</p>

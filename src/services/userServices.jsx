@@ -1,15 +1,15 @@
 import { api } from "../api"
 
-export const loginUser = async(data) => {
+export const loginUser = async (data) => {
     try {
         const res = await api.post('/login', data)
         return res.data
     } catch (error) {
-        return error.response.data        
+        return error.response.data
     }
 }
 
-export const registerUser = async(data) => {
+export const registerUser = async (data) => {
     try {
         const res = await api.post('/register', data)
         return res
@@ -18,7 +18,7 @@ export const registerUser = async(data) => {
     }
 }
 
-export const getUser = async() => {
+export const getUser = async () => {
     try {
         const res = await api.get('/profile')
         console.log(res + " adsf")
@@ -26,6 +26,15 @@ export const getUser = async() => {
     } catch (error) {
         console.log('catchdadi')
         return error.response.data
+    }
+}
+
+export const logout = async () => {
+    try {
+        const res = await api.post('/logout')
+        return res.data
+    } catch (error) {
+        return error.response
     }
 }
 

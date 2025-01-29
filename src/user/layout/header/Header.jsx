@@ -3,19 +3,25 @@ import serachIcon from "../../../assets/icons/search-normal.png";
 import logo from '../../../assets/images/logo/Profil.png';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react'
-import { getUser } from '../../../services/userServices'
+import { getUser, logout } from '../../../services/userServices'
 import { setUser } from '../../../redux/slices/userSlice'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch()
+  const nav = useNavigate()
   useEffect(() => {
     getUser().then(res => {
       dispatch(setUser(res))
       console.log(res + " disNav");
-
     })
   }, [])
+
+  const logoutUser = async () => {
+    const res = await logout()
+    console.log(res);
+    nav('/login')
+  }
 
   const { user } = useSelector((state) => state.user);
   return (
@@ -52,7 +58,7 @@ const Navbar = () => {
                   <Link to={'/favCars'} href="/profile" className="px-2 w-[80%] py-2 hover:bg-gray-100 rounded-lg transition duration-200">
                     Favorite
                   </Link>
-                  <a href="/logout" className="px-2 py-2 w-[80%] hover:bg-gray-100 rounded-lg transition duration-200 text-red-500">
+                  <a onClick={logoutUser} className="px-2 py-2 w-[80%] cursor-pointer hover:bg-gray-100 rounded-lg transition duration-200 text-red-500">
                     Logout
                   </a>
                 </>
