@@ -27,7 +27,7 @@ const Navbar = () => {
         </div>
 
         {/* Arama Kutusu */}
-        <div className="relative  items-center w-[34.53%] max-w-[280px] hidden md:flex">
+        {/* <div className="relative  items-center w-[34.53%] max-w-[280px] hidden md:flex">
           <input
             type="text"
             placeholder="Search something here"
@@ -38,7 +38,7 @@ const Navbar = () => {
             alt="Search Icon"
             className="absolute left-3 h-5 w-5 pointer-events-none"
           />
-        </div>
+        </div> */}
 
         {/* İkonlar */}
         <div className="relative group z-50">
@@ -52,9 +52,6 @@ const Navbar = () => {
                   <Link to={'/favCars'} href="/profile" className="px-2 w-[80%] py-2 hover:bg-gray-100 rounded-lg transition duration-200">
                     Favorite
                   </Link>
-                  <a href="/settings" className="px-2 py-2 w-[80%] hover:bg-gray-100 rounded-lg transition duration-200">
-                    Theme
-                  </a>
                   <a href="/logout" className="px-2 py-2 w-[80%] hover:bg-gray-100 rounded-lg transition duration-200 text-red-500">
                     Logout
                   </a>

@@ -4,25 +4,19 @@ import { FaRegHeart } from "react-icons/fa6";
 import car from "../../../assets/images/car.png";
 import { BsFillFuelPumpFill } from "react-icons/bs";
 import BasicBtn from "../button/BasicBtn";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addFav, deleteFav, setUser } from "../../../redux/slices/userSlice";
 import { addToFav } from "../../../services/carServices";
+import { getUser } from "../../../services/userServices";
 
 function BasicCart(carData) {
   const [data, setData] = useState({
     userId: "",
     carId: "",
   })
+  const dis = useDispatch()
   const sel = useSelector((state) => state.user);
   const { user } = sel
-
-
-
-
-  // console.log(carData)
-  // console.log(data)
-  // const getFav = async () => {
-  //   const res = await getFavCars({ userId })
-  // }
   const [isLiked, setIsLiked] = useState(false);
   const [animationClass, setAnimationClass] = useState("");
 
@@ -34,7 +28,8 @@ function BasicCart(carData) {
   );
 
   useEffect(() => {
-
+    console.log("useEffect isledi");
+    console.log(user.favList)
     if (user && user._id && carData._id) {
       if (user.favList.includes(carData._id)) {
         setIsLiked(true);
@@ -45,7 +40,16 @@ function BasicCart(carData) {
         carId: carData._id,
       });
     }
-  }, [user, carData]);
+  }, []);
+
+   useEffect(() => {
+     getUser().then(res => {
+       dis(setUser(res))
+       console.log(res + " disNav");
+     })
+     console.log(user.favList);
+     
+   }, [isLiked])
 
   const setLike = async () => {
     setData({
@@ -57,12 +61,20 @@ function BasicCart(carData) {
     console.log(res)
     if (res.message === 'Maşın favoritlərə əlavə edildi') {
       setAnimationClass("animate-shrink");
+      dis(addFav(data.carId))
+      console.log("dislendi");
+
     } else {
       setAnimationClass("animate-pop");
+      dis(deleteFav(data.carId))
+      console.log("delete dislendi");
+
     }
 
     setTimeout(() => setAnimationClass(""), 300);
     setIsLiked(!isLiked);
+    console.log(user.favList);
+
   };
 
   return (
