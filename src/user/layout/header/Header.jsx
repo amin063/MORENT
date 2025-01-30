@@ -28,9 +28,9 @@ const Navbar = () => {
     <div className="w-full shadow bg-white">
       <div className="flex items-center w-[85%] mx-auto justify-between bg-white text-primary h-[100px]">
         {/* Logo */}
-        <div className="text-2xl font-bold text-blue-600 cursor-pointer">
+        <Link to={"/"} className="text-2xl font-bold text-blue-600 cursor-pointer">
           MORENT
-        </div>
+        </Link>
 
         {/* Arama Kutusu */}
         {/* <div className="relative  items-center w-[34.53%] max-w-[280px] hidden md:flex">

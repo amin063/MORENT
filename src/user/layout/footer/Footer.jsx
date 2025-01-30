@@ -34,7 +34,7 @@ function Footer() {
                 <div key={index}>
                   <h3 className='font-bold text-[20px] mb-[20px]'>{item.name}</h3>
                   <ul className='flex flex-col gap-5'>
-                    {item.links.map((item, index) => <li key={index} className='text-[#13131399]'>{item}</li>)}
+                    {item.links.map((item, index) => <li key={index} className='text-[#13131399]'> <a href="#">{item}</a> </li>)}
                   </ul>
                 </div>
               )
