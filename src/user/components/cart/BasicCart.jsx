@@ -29,7 +29,6 @@ function BasicCart(carData) {
 
   useEffect(() => {
     console.log("useEffect isledi");
-    console.log(user.favList)
     if (user && user._id && carData._id) {
       if (user.favList.includes(carData._id)) {
         setIsLiked(true);
