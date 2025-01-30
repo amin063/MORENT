@@ -61,6 +61,9 @@ const Navbar = () => {
                   <a onClick={logoutUser} className="px-2 py-2 w-[80%] cursor-pointer hover:bg-gray-100 rounded-lg transition duration-200 text-red-500">
                     Logout
                   </a>
+                  <Link to={'/contact'} href="/profile" className="px-2 w-[80%] py-2 hover:bg-gray-100 rounded-lg transition duration-200">
+                    Contact
+                  </Link>
                 </>
               )}
             </div>

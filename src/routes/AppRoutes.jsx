@@ -19,6 +19,7 @@ import Calendar from "../admin/pages/calendar/calendar";
 import Settings from "../admin/pages/settings/settings";
 import HelpCenter from "../admin/pages/helpCenter/helpCenter";
 import FavCars from "../user/pages/favCars/FavCars";
+import Contact from "../user/pages/contact/Contact";
 
 function AppRoutes() {
     return (
@@ -29,6 +30,7 @@ function AppRoutes() {
                 <Route path='details/:id' element={<Details />} />
                 <Route path='payment/:id' element={<Payment />} />
                 <Route path='favCars' element={<FavCars />} />
+                <Route path='contact' element={<Contact />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
