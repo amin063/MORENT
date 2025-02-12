@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getRentHistory } from "../../../services/carServices";
 
 const Calendar = () => {
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -6,6 +7,7 @@ const Calendar = () => {
   const [selectedMonth, setSelectedMonth] = useState(currentDate.getMonth());
   const [selectedYear, setSelectedYear] = useState(currentDate.getFullYear());
   const [time, setTime] = useState("");
+  const [rentedDays, setRentedDays] = useState({}); // Kiralanan günleri ve araba sayılarını tutacak state
 
   // Saat güncelleme
   useEffect(() => {
@@ -13,6 +15,22 @@ const Calendar = () => {
       setTime(new Date().toLocaleTimeString());
     }, 1000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Kiralama tarihlerini çekme
+  useEffect(() => {
+    const fetchRentedDays = async () => {
+      const res = await getRentHistory();
+      if (res && res.rentedCars) {
+        const rentedDatesCount = res.rentedCars.reduce((acc, rent) => {
+          const date = new Date(rent.date).toISOString().split("T")[0]; // Tarihi YYYY-MM-DD formatına çevir
+          acc[date] = (acc[date] || 0) + 1; // Tarihe göre kiralama sayısını artır
+          return acc;
+        }, {});
+        setRentedDays(rentedDatesCount); // Kiralanan tarihleri ve araba sayılarını state'e kaydet
+      }
+    };
+    fetchRentedDays();
   }, []);
 
   // Aylar listesi
@@ -40,6 +58,12 @@ const Calendar = () => {
   // Takvim günlerini doldurmak için
   const calendarDays = Array.from({ length: firstDayOfMonth }).fill(null)
     .concat(Array.from({ length: daysInMonth }, (_, i) => i + 1));
+
+  // Günün kiralanıp kiralanmadığını ve kaç araba kiralandığını kontrol etme
+  const getRentedCarCount = (day) => {
+    const date = new Date(selectedYear, selectedMonth, day).toISOString().split("T")[0];
+    return rentedDays[date] || 0; // Kiralama sayısını döndür
+  };
 
   return (
     <div className="p-6">
@@ -90,9 +114,16 @@ const Calendar = () => {
             date ? (
               <div
                 key={index}
-                className="h-16 flex items-center justify-center border rounded-lg hover:bg-blue-100 cursor-pointer text-gray-700"
+                className={`h-16 flex items-center justify-center border rounded-lg hover:bg-blue-100 cursor-pointer text-gray-700 relative ${
+                  getRentedCarCount(date) > 0 ? "bg-green-200" : ""
+                }`}
               >
                 {date}
+                {getRentedCarCount(date) > 0 && (
+                  <span className="absolute top-1 right-1 bg-blue-500 text-white text-xs rounded-full px-2 py-1">
+                    {getRentedCarCount(date)}
+                  </span>
+                )}
               </div>
             ) : (
               <div key={index} className="h-16"></div> // Boş hücreler

@@ -28,7 +28,6 @@ function BasicCart(carData) {
   );
 
   useEffect(() => {
-    console.log("useEffect isledi");
     if (user && user._id && carData._id) {
       if (user.favList.includes(carData._id)) {
         setIsLiked(true);
@@ -45,9 +44,7 @@ function BasicCart(carData) {
      getUser().then(res => {
        dis(setUser(res))
        console.log(res + " disNav");
-     })
-     console.log(user.favList);
-     
+     })     
    }, [isLiked])
 
   const setLike = async () => {
@@ -57,7 +54,6 @@ function BasicCart(carData) {
       carId: carData._id,
     })
     const res = await addToFav(data)
-    console.log(res)
     if (res.message === 'Maşın favoritlərə əlavə edildi') {
       setAnimationClass("animate-shrink");
       dis(addFav(data.carId))
@@ -72,9 +68,9 @@ function BasicCart(carData) {
 
     setTimeout(() => setAnimationClass(""), 300);
     setIsLiked(!isLiked);
-    console.log(user.favList);
 
   };
+  console.log(carData)
 
   return (
     <div className="w-full max-w-[280px] max-h-[300px] pt-5 flex">
@@ -113,7 +109,7 @@ function BasicCart(carData) {
         {/* BUY */}
         <div className="flex justify-between items-center">
           <p className="font-bold">
-            ${carData.price} / <span className="text-accent text-[14px]">day</span>
+            ${carData?.price} / <span className="text-accent text-[14px]">day</span>
           </p>
           <BasicBtn path={`/details/${carData._id}`} />
         </div>

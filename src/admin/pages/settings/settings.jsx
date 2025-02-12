@@ -1,97 +1,65 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from "react";
+import { updateAdmin } from "../../../services/adminServices";
 
 const Settings = () => {
-  const [theme, setTheme] = useState("light");
-  const [language, setLanguage] = useState("English");
-  const [email, setEmail] = useState("user@example.com");
-  const [password, setPassword] = useState("");
-
-  // Tema değişim fonksiyonu
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [theme]);
-
-  const handleThemeChange = (event) => setTheme(event.target.value);
-  const handleLanguageChange = (event) => setLanguage(event.target.value);
-  const handleEmailChange = (event) => setEmail(event.target.value);
-  const handlePasswordChange = (event) => setPassword(event.target.value);
-
-  const handleSave = () => {
-    // Değişiklikleri kaydetme işlemi (API çağrısı vs.)
-    alert("Settings Saved!");
+  const [data, setData] = useState({});
+  const [message, setMessage] = useState("");
+  const handleInput = (e) => {
+    setData((prev) => setData({ ...prev, [e.target.name]: e.target.value }));
+  };
+  const handleUpdate = async (e) => {
+    e.preventDefault()
+    const res = await updateAdmin(data);
+    console.log(res);
   };
 
   return (
-    <div className="p-4 max-w-3xl mx-auto h-screen overflow-y-auto">
-      <h1 className="text-xl font-semibold text-gray-800 mb-4">Settings</h1>
-      
-      {/* Kullanıcı Profil Ayarları */}
-      <div className="bg-white p-4 shadow-md rounded-lg mb-4">
-        <h2 className="text-lg font-semibold text-gray-700 mb-2">User Profile</h2>
-        <div className="space-y-3">
+    <div className="p-6 bg-gray-100 mt-3 flex items-center justify-center">
+      <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-2xl">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+          Settings
+        </h1>
+
+        <form onSubmit={handleUpdate} className="space-y-6">
           <div>
-            <label className="text-gray-600 text-sm">Email</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Username
+            </label>
             <input
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-              className="mt-1 p-2 text-sm border border-gray-300 rounded-md w-full"
+              type="text"
+              name='username'
+              onChange={handleInput}
+              className="mt-1 p-3 w-full border rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              required
             />
           </div>
+
           <div>
-            <label className="text-gray-600 text-sm">Password</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
             <input
               type="password"
-              value={password}
-              onChange={handlePasswordChange}
-              className="mt-1 p-2 text-sm border border-gray-300 rounded-md w-full"
+              name="password"
+              onChange={handleInput}
+              className="mt-1 p-3 w-full border rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              required
             />
           </div>
-        </div>
-      </div>
-      
-      {/* Tercihler (Tema ve Dil) */}
-      <div className="bg-white p-4 shadow-md rounded-lg mb-4">
-        <h2 className="text-lg font-semibold text-gray-700 mb-2">Preferences</h2>
-        <div className="space-y-3">
-          <div>
-            <label className="text-gray-600 text-sm">Theme</label>
-            <select
-              value={theme}
-              onChange={handleThemeChange}
-              className="mt-1 p-2 text-sm border border-gray-300 rounded-md w-full"
-            >
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-            </select>
-          </div>
-          <div>
-            <label className="text-gray-600 text-sm">Language</label>
-            <select
-              value={language}
-              onChange={handleLanguageChange}
-              className="mt-1 p-2 text-sm border border-gray-300 rounded-md w-full"
-            >
-              <option value="English">English</option>
-              <option value="Turkish">Turkish</option>
-              <option value="Spanish">Spanish</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      
-      {/* Kaydet Butonu */}
-      <div className="flex justify-end">
-        <button
-          onClick={handleSave}
-          className="px-4 py-1 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700"
-        >
-          Save Changes
-        </button>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition duration-300 shadow-md"
+          >
+            Save Changes
+          </button>
+
+          {message && (
+            <p className="mt-4 text-center text-green-500 font-semibold">
+              {message}
+            </p>
+          )}
+        </form>
       </div>
     </div>
   );

@@ -31,21 +31,6 @@ const Navbar = () => {
         <Link to={"/"} className="text-2xl font-bold text-blue-600 cursor-pointer">
           MORENT
         </Link>
-
-        {/* Arama Kutusu */}
-        {/* <div className="relative  items-center w-[34.53%] max-w-[280px] hidden md:flex">
-          <input
-            type="text"
-            placeholder="Search something here"
-            className="w-full pl-10 pr-10 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-300 text-sm placeholder:text-sm"
-          />
-          <img
-            src={serachIcon}
-            alt="Search Icon"
-            className="absolute left-3 h-5 w-5 pointer-events-none"
-          />
-        </div> */}
-
         {/* İkonlar */}
         <div className="relative group z-50">
           <p className="font-bold border p-2 cursor-pointer hover:bg-gray-100 transition duration-200 rounded">

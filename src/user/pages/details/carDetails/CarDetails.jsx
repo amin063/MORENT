@@ -23,11 +23,6 @@ const CarDetails = () => {
             {/* THUBNAILS */}
             <div className='grid gap-10 grid-rows-3'>
                 <div className='row-span-3 flex justify-center items-center border'><img className='rounded-md' src={image1} /></div>
-                {/* <div className='row-span-1 gap-5 grid grid-cols-3'>
-                    <div className='flex justify-center items-center border-2 border-primary rounded-md'><img className='rounded-md' src={image3} /></div>
-                    <div className='flex justify-center items-center border'><img className='rounded-md' src={image2} /></div>
-                    <div className='flex justify-center items-center border'><img className='rounded-md' src={image1} /></div>
-                </div> */}
             </div>
             {/* INFO */}
             <div className='bg-white flex flex-col justify-between gap-5 p-5'>
@@ -49,7 +44,7 @@ const CarDetails = () => {
                 </div>
                 {/* BUY */}
                 <div className='flex justify-between'>
-                    <p className='font-bold text-[25px]'>$80.00/ <span className='text-[#596780] text-base'>days</span></p>
+                    <p className='font-bold text-[25px]'>${carData.price}.00/ <span className='text-[#596780] text-base'>days</span></p>
                     <BasicBtn path={`/payment/${carData._id}`}/>
                 </div>
             </div>

@@ -49,3 +49,40 @@ export const getFavCars = async ({ userId }) => {
         return error.response
     }
 }
+
+// ----------------------
+
+export const getRentHistory = async () => {
+    try {
+        const res = await api.get('getHistory')
+        return res.data
+    } catch (error) {
+        return error.response        
+    }
+}
+
+export const addCar = async (data) => {
+    try {
+        const res = await api.post('/add', data)
+        return res.data
+    } catch (error) {
+        return error.response
+    }
+}
+
+export const deleteCar = async (id) => {
+    try {
+        const res = await api.delete(`/delete/:${id}`)
+        return res
+    } catch (error) {
+        return error.response
+    }
+}
+
+
+export const withdrawalCar = async (_id) => {
+    try {
+        const res = await api('/withdrawalCar', { _id })
+    } catch (error) {
+    }
+}
