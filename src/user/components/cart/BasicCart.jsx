@@ -43,7 +43,6 @@ function BasicCart(carData) {
    useEffect(() => {
      getUser().then(res => {
        dis(setUser(res))
-       console.log(res + " disNav");
      })     
    }, [isLiked])
 
@@ -57,12 +56,10 @@ function BasicCart(carData) {
     if (res.message === 'Maşın favoritlərə əlavə edildi') {
       setAnimationClass("animate-shrink");
       dis(addFav(data.carId))
-      console.log("dislendi");
 
     } else {
       setAnimationClass("animate-pop");
       dis(deleteFav(data.carId))
-      console.log("delete dislendi");
 
     }
 
@@ -70,7 +67,6 @@ function BasicCart(carData) {
     setIsLiked(!isLiked);
 
   };
-  console.log(carData)
 
   return (
     <div className="w-full max-w-[280px] max-h-[300px] pt-5 flex">

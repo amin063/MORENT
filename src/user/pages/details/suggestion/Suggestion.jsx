@@ -16,7 +16,7 @@ const Suggestion = () => {
       <div>
       <div className="w-[70%] md:w-[98%] mx-[auto] flex justify-between mt-10">
           <h4 className="text-[16px] text-accent">Recomendation Car</h4>
-          <Link>View All</Link>
+          <Link to={'/'}>View All</Link>
         </div>
         <Swiper />
       </div>

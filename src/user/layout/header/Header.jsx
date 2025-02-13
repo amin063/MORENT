@@ -12,6 +12,12 @@ const Navbar = () => {
   const nav = useNavigate()
   useEffect(() => {
     getUser().then(res => {
+      console.log(res.user)
+      if(!res.user) {
+        console.log('sss')
+        nav('/login')
+        return
+      }
       dispatch(setUser(res))
       console.log(res + " disNav");
     })
@@ -19,8 +25,9 @@ const Navbar = () => {
 
   const logoutUser = async () => {
     const res = await logout()
-    console.log(res);
     nav('/login')
+    console.log(res);
+    window.location.reload()
   }
 
   const { user } = useSelector((state) => state.user);
