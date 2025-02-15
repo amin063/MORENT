@@ -1,88 +1,121 @@
-import React, { useEffect, useState } from 'react'
-import { filterCars } from '../../../services/carServices'
+import React, { useState } from "react";
+import { filterCars, getCars } from "../../../services/carServices"; // getCars fonksiyonunu da import ediyoruz
 
-const Sidebar = ({ isMenu, setIsMenu, cars, setCars }) => {
-    const [filterData, setFilterData] = useState({})
-    const [price, setPrice] = useState(100)
-    const fakeList = ["SUV", "Sedan", "Hatchback", "Coupe", "Van", "Wagon",]
-    const fakeList1 = ["2", "4", "6", "8"]
-    const handleFilter = async (e) => {
-        setFilterData((prevData) => {
-            const { name, value, checked } = e.target;
-            if (checked) {
-                return { ...prevData, [name]: [...(prevData[name] || []), value] };
-            } else {
-                return { ...prevData, [name]: prevData[name].filter((item) => item !== value) };
-            }
-        });
+const Sidebar = ({ cars, setCars, isMenu, setIsMenu }) => {
+  const [filterData, setFilterData] = useState({});
+  const [price, setPrice] = useState(100);
+  const fakeList = ["SUV", "Sedan", "Hatchback", "Coupe", "Van", "Wagon"];
+  const fakeList1 = ["2", "4", "6", "8"];
+
+  // Filtreleme işlemi
+  const handleFilter = async (e) => {
+    setFilterData((prevData) => {
+      const { name, value, checked } = e.target;
+      if (checked) {
+        return { ...prevData, [name]: [...(prevData[name] || []), value] };
+      } else {
+        return { ...prevData, [name]: prevData[name].filter((item) => item !== value) };
+      }
+    });
+  };
+
+  // Filtreleme uygula
+  const searchCar = async () => {
+    try {
+      const { type, capacity } = filterData;
+      const res = await filterCars({ type, capacity, price });
+      setCars(res.cars);
+    } catch (error) {
+      setCars([]);
     }
+  };
 
-        const searchCar = async () => {
-            try {
-                const { type, capacity } = filterData
-                const res = await filterCars({ type, capacity, price })
-                setCars(res.cars)                
-            } catch (error) {
-                setCars([])
-            }
-        }
-    console.log(cars + " sidebar cars");
-    
+  // Filtreleri sıfırla
+  const resetFilters = async () => {
+    try {
+      // Filtre state'lerini sıfırla
+      setFilterData({});
+      setPrice(100);
 
-    return (
-        <div className={`${isMenu ? "hidden" : "flex"} flex flex-col h-full gap-10 px-5 absolute left-0 bg-white md:static md:col-span-2 md:flex max-w-[500px]`}>
-            {/* TYPE */}
-            <div className='flex flex-col gap-5 mt-10'>
-                <p className='text-accent'>TYPE</p>
-                {
-                    fakeList.map((item, index) =>
-                    (
-                        <label key={index} className='flex gap-1 text-[#596780]' htmlFor="">
-                            <input name="type" value={item} onChange={handleFilter} type="checkbox" />
-                            {item}
-                        </label>
-                    )
-                    )
-                }
-            </div>
+      // Tüm arabaları yeniden yükle
+      const res = await getCars();
+      setCars(res.carLists);
+    } catch (error) {
+      console.error("Filtre sıfırlama sırasında hata:", error);
+    }
+  };
 
-            {/* CAPACITY */}
-            <div className='flex flex-col gap-5'>
-                <p className='text-accent'>CAPACITY</p>
-                {
-                    fakeList1.map((item, index) =>
-                    (
-                        <label key={index} className='flex gap-1 text-[#596780]' htmlFor="">
-                            <input name="capacity" value={item} onChange={handleFilter} type="checkbox" />
-                            {item} Person
-                        </label>
-                    )
-                    )
-                }
-            </div>
-            {/* PRICE */}
-            <div>
-                <p className='text-accent'>PRICE</p>
-                <label htmlFor="">
-                    <input
-                        onChange={(e) => setPrice(e.target.value)}
-                        className='bg-blue-[#3563E9]'
-                        min={100}
-                        max={300}
-                        value={price}
-                        type="range" />
-                    <p className='text-[#596780] font-semibold'>{price}$ / day</p>
-                </label>
-            </div>
-            {/* BTN */}
+  return (
+    <div className="p-4">
+      {/* TYPE */}
+      <div className="flex flex-col gap-3 mb-6">
+        <p className="text-accent font-semibold">TYPE</p>
+        {fakeList.map((item, index) => (
+          <label key={index} className="flex gap-2 items-center text-[#596780]">
             <input
-                onClick={searchCar}
-                className='bg-primary text-white py-1 px-2 rounded-md cursor-pointer'
-                type="submit"
-                value={'Search'}
+              name="type"
+              value={item}
+              onChange={handleFilter}
+              type="checkbox"
+              className="w-4 h-4"
+              checked={filterData.type?.includes(item) || false} // Seçili olanları işaretle
             />
-        </div>
-    )
-}
+            {item}
+          </label>
+        ))}
+      </div>
 
-export default Sidebar
+      {/* CAPACITY */}
+      <div className="flex flex-col gap-3 mb-6">
+        <p className="text-accent font-semibold">CAPACITY</p>
+        {fakeList1.map((item, index) => (
+          <label key={index} className="flex gap-2 items-center text-[#596780]">
+            <input
+              name="capacity"
+              value={item}
+              onChange={handleFilter}
+              type="checkbox"
+              className="w-4 h-4"
+              checked={filterData.capacity?.includes(item) || false} // Seçili olanları işaretle
+            />
+            {item} Person
+          </label>
+        ))}
+      </div>
+
+      {/* PRICE */}
+      <div className="mb-6">
+        <p className="text-accent font-semibold">PRICE</p>
+        <label className="block">
+          <input
+            onChange={(e) => setPrice(e.target.value)}
+            className="w-full"
+            min={100}
+            max={2500}
+            value={price}
+            type="range"
+          />
+          <p className="text-[#596780] font-semibold">{price}$ / day</p>
+        </label>
+      </div>
+
+      {/* SEARCH BUTTON */}
+      <button
+        onClick={searchCar}
+        className="w-full bg-primary text-white py-2 px-4 rounded-md cursor-pointer hover:bg-primary-dark transition-colors duration-300 mb-4"
+      >
+        Search
+      </button>
+
+      {/* RESET BUTTON */}
+      <button
+        onClick={resetFilters}
+        className="w-full bg-gray-500 text-white py-2 px-4 rounded-md cursor-pointer hover:bg-gray-600 transition-colors duration-300"
+      >
+        Reset Filters
+      </button>
+    </div>
+  );
+};
+
+export default Sidebar;

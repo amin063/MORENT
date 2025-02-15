@@ -3,20 +3,20 @@ import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import car from "../../../assets/images/car.png";
 import { BsFillFuelPumpFill } from "react-icons/bs";
-import BasicBtn from "../button/BasicBtn";
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, deleteFav, setUser } from "../../../redux/slices/userSlice";
 import { addToFav } from "../../../services/carServices";
 import { getUser } from "../../../services/userServices";
+import { Link } from "react-router-dom"; // Link ekledik
 
 function BasicCart(carData) {
   const [data, setData] = useState({
     userId: "",
     carId: "",
-  })
-  const dis = useDispatch()
+  });
+  const dis = useDispatch();
   const sel = useSelector((state) => state.user);
-  const { user } = sel
+  const { user } = sel;
   const [isLiked, setIsLiked] = useState(false);
   const [animationClass, setAnimationClass] = useState("");
 
@@ -40,74 +40,79 @@ function BasicCart(carData) {
     }
   }, []);
 
-   useEffect(() => {
-     getUser().then(res => {
-       dis(setUser(res))
-     })     
-   }, [isLiked])
+  useEffect(() => {
+    getUser().then((res) => {
+      dis(setUser(res));
+    });
+  }, [isLiked]);
 
   const setLike = async () => {
     setData({
       ...data,
       userId: user._id,
       carId: carData._id,
-    })
-    const res = await addToFav(data)
-    if (res.message === 'Maşın favoritlərə əlavə edildi') {
+    });
+    const res = await addToFav(data);
+    if (res.message === "Maşın favoritlərə əlavə edildi") {
       setAnimationClass("animate-shrink");
-      dis(addFav(data.carId))
-
+      dis(addFav(data.carId));
     } else {
       setAnimationClass("animate-pop");
-      dis(deleteFav(data.carId))
-
+      dis(deleteFav(data.carId));
     }
 
     setTimeout(() => setAnimationClass(""), 300);
     setIsLiked(!isLiked);
-
   };
 
   return (
-    <div className="w-full max-w-[280px] max-h-[300px] pt-5 flex">
-      <div className="flex flex-col gap-5 bg-white p-5 rounded-md shadow-md">
+    <div className="w-full bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+      <div className="p-4">
         {/* HEADER */}
-        <div>
-          <div className="flex justify-between items-center">
-            <p className="font-bold text-[20px]">{carData.name}</p>
-            <div onClick={setLike}>{isLiked ? likedIcon : unLikedIcon}</div>
+        <div className="flex justify-between items-center mb-4">
+          <div>
+            <p className="font-bold text-lg text-gray-800">{carData.name}</p>
+            <p className="text-sm text-gray-500">{carData.type}</p>
           </div>
-          <p className="text-accent font-bold text-[14px]">{carData.type}</p>
+          <div onClick={setLike} className="cursor-pointer">
+            {isLiked ? likedIcon : unLikedIcon}
+          </div>
         </div>
+
         {/* IMAGE */}
         <img
           src={car}
           alt="Car"
-          className="w-full  object-cover rounded-md"
+          className="w-full h-40 object-contain rounded-lg mb-4"
         />
 
         {/* DETAIL */}
-        <div className="flex justify-between items-center text-accent text-[14px]">
-          <div className="flex gap-1 items-center">
-            <BsFillFuelPumpFill />
-            {carData.fuelCapacity}L
+        <div className="flex justify-between items-center text-gray-600 text-sm mb-4">
+          <div className="flex items-center space-x-2">
+            <BsFillFuelPumpFill className="text-gray-500" />
+            <span>{carData.fuelCapacity}L</span>
           </div>
-          <div className="flex gap-1 items-center">
-            <BsFillFuelPumpFill />
-            {carData.driveType}
+          <div className="flex items-center space-x-2">
+            <BsFillFuelPumpFill className="text-gray-500" />
+            <span>{carData.driveType}</span>
           </div>
-          <div className="flex gap-1 items-center">
-            <BsFillFuelPumpFill />
-            {carData.capacity} People
+          <div className="flex items-center space-x-2">
+            <BsFillFuelPumpFill className="text-gray-500" />
+            <span>{carData.capacity} People</span>
           </div>
         </div>
 
         {/* BUY */}
         <div className="flex justify-between items-center">
-          <p className="font-bold">
-            ${carData?.price} / <span className="text-accent text-[14px]">day</span>
+          <p className="font-bold text-lg text-gray-800">
+            ${carData?.price} <span className="text-sm text-gray-500">/ day</span>
           </p>
-          <BasicBtn path={`/details/${carData._id}`} />
+          <Link
+            to={`/details/${carData._id}`}
+            className="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark transition-colors duration-300"
+          >
+            Rent Now
+          </Link>
         </div>
       </div>
     </div>
