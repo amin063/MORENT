@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "../../user/layout/header/Header";
 import Sidebar from "../components/sidebar/sidebar";
 import { getAdmin } from "../../services/adminServices";
+import Header from "./header/AdminHeader";
 
 function AdminLayout() {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ function AdminLayout() {
     <div className="flex h-screen w-full max-w-[2000px] mx-auto overflow-hidden">
       {/* Navbar */}
       <div className="absolute top-0 w-full z-10">
-        <Navbar />
+        <Header/>
       </div>
 
       {/* Ana İçerik */}
