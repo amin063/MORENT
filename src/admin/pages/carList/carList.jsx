@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { addCar } from "../../../services/carServices";
+import axios from "axios";
 
 const AdminForm = ({ onCarAdded }) => {
   const [formData, setFormData] = useState({});
@@ -7,14 +8,28 @@ const AdminForm = ({ onCarAdded }) => {
 
   const inputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
+    try {
+      const res = await axios.post(
+        `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        formData
+      );
+      setFormData((prev) => ({ ...prev, img: res.data.secure_url }));
+    } catch (err) {
+      console.error("Image upload failed", err);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await addCar(formData);
-      console.log(res);
       setMessage("Car added successfully!");
     } catch (err) {
       console.log(err + " catchdadi");
@@ -45,9 +60,9 @@ const AdminForm = ({ onCarAdded }) => {
               Car Image
             </label>
             <input
-              type="text"
-              name="img"
-              onChange={inputChange}
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
               className="mt-1 p-3 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
               required
             />

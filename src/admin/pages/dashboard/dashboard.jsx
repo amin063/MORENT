@@ -56,6 +56,8 @@ const Dashboard = () => {
     car.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  console.log(cars);
+
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       <div className="text-center mb-8">
@@ -110,7 +112,7 @@ const Dashboard = () => {
                 Delete
               </button>
               <img
-                src={car.image}
+                src={car.img}
                 alt={car.name}
                 className="w-full sm:w-1/3 h-48 sm:h-auto object-cover"
               />
