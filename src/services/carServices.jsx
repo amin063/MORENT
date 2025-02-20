@@ -72,7 +72,7 @@ export const addCar = async (data) => {
 
 export const deleteCar = async (id) => {
     try {
-        const res = await api.delete(`/delete/:${id}`)
+        const res = await api.delete(`/delete/${id}`)
         return res
     } catch (error) {
         return error.response
