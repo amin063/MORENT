@@ -110,12 +110,15 @@ const Dashboard = () => {
               >
                 Delete
               </button>
-              <img
+              <div className="w-[350px] h-[295px] bg-gray-200 flex items-center justify-center overflow-hidden rounded-lg">
+                <img src={car.img} alt={car.name} className="w-full h-full object-cover" />
+              </div>
+
+              {/* <img
                 src={car.img}
                 alt={car.name}
-                className="w-[350px] h-[295px] object-cover"
                 // className="w-full sm:w-1/3 h-48 sm:h-auto object-cover"
-              />
+              /> */}
               <div className="p-4 flex flex-col justify-between w-full">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-800 mb-2">
@@ -134,9 +137,8 @@ const Dashboard = () => {
                 <div className="flex items-center justify-between mt-4">
                   <div className="flex items-center gap-2">
                     <div
-                      className={`w-3 h-3 rounded-full ${
-                        car.rentDetails ? "bg-green-500" : "bg-red-500"
-                      }`}
+                      className={`w-3 h-3 rounded-full ${car.rentDetails ? "bg-green-500" : "bg-red-500"
+                        }`}
                     ></div>
                     <span className="text-sm text-gray-600">
                       {car.rentDetails ? "Rented" : "Available"}
