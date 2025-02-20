@@ -21,7 +21,7 @@ const BillMain = ({ setFormData, formData, name, days, setDays }) => {
     }
     return (
         <div className='flex gap-3'>
-            <img className='w-[30%]' src={car} alt="" />
+            <img className='w-[30%]' src={carData.img} alt="" />
             <div className='flex flex-col gap-2'>
                 <h4 className='font-bold text-2xl'>{name}</h4>
                 <div className='flex items-center gap-3'>

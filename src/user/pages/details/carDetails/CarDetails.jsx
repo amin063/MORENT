@@ -22,7 +22,7 @@ const CarDetails = () => {
         <div className='grid grid-rows-1 gap-5 md:grid-cols-2 w-[90%] max-w-[1120px] m-auto mt-10'>
             {/* THUBNAILS */}
             <div className='grid gap-10 grid-rows-3'>
-                <div className='row-span-3 flex justify-center items-center border'><img className='rounded-md' src={image1} /></div>
+                <div className='row-span-3 flex justify-center items-center border'><img className='rounded-md' src={carData.img} /></div>
             </div>
             {/* INFO */}
             <div className='bg-white flex flex-col justify-between gap-5 p-5'>
