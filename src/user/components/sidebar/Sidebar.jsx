@@ -3,7 +3,7 @@ import { filterCars, getCars } from "../../../services/carServices";
 
 const Sidebar = ({ cars, setCars, isMenu, setIsMenu }) => {
   const [filterData, setFilterData] = useState({});
-  const [price, setPrice] = useState(100);
+  const [price, setPrice] = useState(50);
   const fakeList = ["SUV", "Sedan", "Hatchback", "Coupe", "Van", "Wagon"];
   const fakeList1 = ["2", "4", "6", "8"];
 
