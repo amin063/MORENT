@@ -113,7 +113,8 @@ const Dashboard = () => {
               <img
                 src={car.img}
                 alt={car.name}
-                className="w-full sm:w-1/3 h-48 sm:h-auto object-cover"
+                className="w-[350px] h-[295px]"
+                // className="w-full sm:w-1/3 h-48 sm:h-auto object-cover"
               />
               <div className="p-4 flex flex-col justify-between w-full">
                 <div>
