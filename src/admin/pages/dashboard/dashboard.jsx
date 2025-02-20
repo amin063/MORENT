@@ -111,7 +111,7 @@ const Dashboard = () => {
                 Delete
               </button>
               <div className="w-[350px] h-[295px] bg-gray-200 flex items-center justify-center overflow-hidden rounded-lg">
-                <img src={car.img} alt={car.name} className="w-full h-full object-cover" />
+                <img src={car.img} alt={car.name} className="w-full h-full object-contain" />
               </div>
 
               {/* <img
