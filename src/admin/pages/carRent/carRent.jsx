@@ -31,11 +31,9 @@ const CarRent = () => {
               key={car._id}
               className="bg-white rounded-xl shadow-md flex flex-col sm:flex-row overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-lg relative"
             >
-              <img
-                src={car.img}
-                alt={car.name}
-                className="w-full sm:w-1/3 h-48 sm:h-auto object-cover"
-              />
+              <div className="w-[350px] h-[295px] bg-gray-200 flex items-center justify-center overflow-hidden rounded-lg">
+                <img src={car.img} alt={car.name} className="w-full h-full object-contain" />
+              </div>
               <div className="p-4 flex flex-col justify-between w-full">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-800 mb-2">{car.name}</h2>
