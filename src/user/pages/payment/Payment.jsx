@@ -44,7 +44,7 @@ function Payment() {
       {/* BILL */}
       <div className='bg-white p-5 flex flex-col gap-5 self-start'>
         <BillHeader />
-        <BillMain formData={formData} setFormData={setFormData} {...carData} days={days} setDays={setDays} />
+        <BillMain formData={formData} setFormData={setFormData} carData={carData} days={days} setDays={setDays} />
         <BillFooter formData={formData} setFormData={setFormData} {...carData} days={days} />
       </div>
     </div>

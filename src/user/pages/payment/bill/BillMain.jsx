@@ -1,7 +1,6 @@
 import React from 'react'
-import car from '../../../../assets/images/image3.jpg'
 
-const BillMain = ({ setFormData, formData, name, days, setDays }) => {
+const BillMain = ({ setFormData, carData, formData, name, days, setDays }) => {
     const daysIncrement = () => {
         setDays((prevDays) => {
             const newDays = prevDays + 1;
