@@ -80,7 +80,7 @@ function BasicCart(carData) {
         </div>
 
         {/* IMAGE */}
-        <div className="w-full h-40">
+        <div className="w-full h-40 mb-3">
           <img
             src={carData.img}
             alt="Car"
