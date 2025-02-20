@@ -8,7 +8,7 @@ const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/cars")
+    fetch("https://morentapi.onrender.com/api/cars")
       .then((res) => res.json())
       .then((data) => setCars(data.carLists))
       .catch((error) => console.error("Error fetching cars:", error));
@@ -51,8 +51,7 @@ const Dashboard = () => {
     setSearchQuery(e.target.value);
   };
 
-  // Filtreleme işlemi
-  const filteredCars = cars.filter((car) =>
+  const filteredCars = cars?.filter((car) =>
     car.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -99,7 +98,7 @@ const Dashboard = () => {
 
       {/* Uzunlamasına kartlar */}
       <div className="flex flex-col gap-6 px-4">
-        {filteredCars.length > 0 ? (
+        {filteredCars?.length > 0 ? (
           filteredCars.map((car) => (
             <div
               key={car._id}

@@ -81,7 +81,7 @@ function BasicCart(carData) {
 
         {/* IMAGE */}
         <img
-          src={car}
+          src={carData.img}
           alt="Car"
           className="w-full h-40 object-contain rounded-lg mb-4"
         />

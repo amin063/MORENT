@@ -5,7 +5,7 @@ const CarRent = () => {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/cars")
+    fetch("https://morentapi.onrender.com/api/cars")
       .then((res) => res.json())
       .then((data) => setCars(data.carLists))
       .catch((error) => console.error("Error fetching cars:", error));

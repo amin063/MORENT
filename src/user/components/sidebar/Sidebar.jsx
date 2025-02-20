@@ -7,7 +7,6 @@ const Sidebar = ({ cars, setCars, isMenu, setIsMenu }) => {
   const fakeList = ["SUV", "Sedan", "Hatchback", "Coupe", "Van", "Wagon"];
   const fakeList1 = ["2", "4", "6", "8"];
 
-  // Filtreleme işlemi
   const handleFilter = async (e) => {
     setFilterData((prevData) => {
       const { name, value, checked } = e.target;
@@ -19,7 +18,6 @@ const Sidebar = ({ cars, setCars, isMenu, setIsMenu }) => {
     });
   };
 
-  // Filtreleme uygula
   const searchCar = async () => {
     try {
       const { type, capacity } = filterData;
@@ -30,14 +28,11 @@ const Sidebar = ({ cars, setCars, isMenu, setIsMenu }) => {
     }
   };
 
-  // Filtreleri sıfırla
   const resetFilters = async () => {
     try {
-      // Filtre state'lerini sıfırla
       setFilterData({});
       setPrice(100);
 
-      // Tüm arabaları yeniden yükle
       const res = await getCars();
       setCars(res.carLists);
     } catch (error) {
@@ -58,7 +53,7 @@ const Sidebar = ({ cars, setCars, isMenu, setIsMenu }) => {
               onChange={handleFilter}
               type="checkbox"
               className="w-4 h-4"
-              checked={filterData.type?.includes(item) || false} // Seçili olanları işaretle
+              checked={filterData.type?.includes(item) || false}
             />
             {item}
           </label>
@@ -76,7 +71,7 @@ const Sidebar = ({ cars, setCars, isMenu, setIsMenu }) => {
               onChange={handleFilter}
               type="checkbox"
               className="w-4 h-4"
-              checked={filterData.capacity?.includes(item) || false} // Seçili olanları işaretle
+              checked={filterData.capacity?.includes(item) || false}
             />
             {item} Person
           </label>

@@ -57,7 +57,7 @@ export const getRentHistory = async () => {
         const res = await api.get('getHistory')
         return res.data
     } catch (error) {
-        return error.response        
+        return error.response
     }
 }
 
@@ -82,7 +82,9 @@ export const deleteCar = async (id) => {
 
 export const withdrawalCar = async (_id) => {
     try {
-        const res = await api('/withdrawalCar', { _id })
+        const res = await api.post('/withdrawalCar', { _id })
+        return res
     } catch (error) {
+        return error.response
     }
 }
