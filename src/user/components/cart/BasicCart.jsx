@@ -80,11 +80,19 @@ function BasicCart(carData) {
         </div>
 
         {/* IMAGE */}
-        <img
+        <div className="w-full h-40">
+          <img
+            src={carData.img}
+            alt="Car"
+            className="w-full h-full object-contain rounded-lg mb-4"
+          />
+
+        </div>
+        {/* <img
           src={carData.img}
           alt="Car"
           className="w-full h-40 object-contain rounded-lg mb-4"
-        />
+        /> */}
 
         {/* DETAIL */}
         <div className="flex justify-between items-center text-gray-600 text-sm mb-4">
