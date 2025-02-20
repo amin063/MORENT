@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { filterCars, getCars } from "../../../services/carServices"; // getCars fonksiyonunu da import ediyoruz
+import { filterCars, getCars } from "../../../services/carServices";
 
 const Sidebar = ({ cars, setCars, isMenu, setIsMenu }) => {
   const [filterData, setFilterData] = useState({});
@@ -85,7 +85,7 @@ const Sidebar = ({ cars, setCars, isMenu, setIsMenu }) => {
           <input
             onChange={(e) => setPrice(e.target.value)}
             className="w-full"
-            min={100}
+            min={50}
             max={2500}
             value={price}
             type="range"
