@@ -5,9 +5,12 @@ import "swiper/css";
 import "./style.css";
 import { Pagination } from "swiper/modules";
 import { getCars } from "../../../../../services/carServices";
+import { useParams } from "react-router-dom";
 
 const CarSwiper = () => {
   const [cars, setCars] = useState([])
+  const {id} = useParams()
+  console.log(id)
   useEffect(() => {
     getCars().then(res => setCars(res.carLists))
   }, [])
@@ -39,8 +42,9 @@ const CarSwiper = () => {
       >
         {/* Kartlar */}
         {
-          cars.filter(car => !car.rentDay).map(car => (
+          cars.filter(car => !car.rentDay && car._id !== id).map(car => (
             <SwiperSlide key={car._id}>
+              
               <BasicCart key={car._id} {...car} />
             </SwiperSlide>
           ))}

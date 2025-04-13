@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { filterCars, getCars } from "../../../services/carServices";
 
-const Sidebar = ({ cars, setCars, isMenu, setIsMenu }) => {
+const Sidebar = ({ cars, setCars, setTotalPages, setCurrentPage, isMenu, setIsMenu }) => {
   const [filterData, setFilterData] = useState({});
   const [price, setPrice] = useState(50);
   const fakeList = ["SUV", "Sedan", "Hatchback", "Coupe", "Van", "Wagon"];
@@ -22,25 +22,37 @@ const Sidebar = ({ cars, setCars, isMenu, setIsMenu }) => {
     try {
       const { type, capacity } = filterData;
       const res = await filterCars({ type, capacity, price });
+  
       setCars(res.cars);
+      setTotalPages(res.totalPages || 1);  // server bunu göndərməlidir!
+      setCurrentPage(1);
     } catch (error) {
       setCars([]);
+      setTotalPages(1);
+      setCurrentPage(1);
     }
     setIsMenu(false);
   };
+  
 
   const resetFilters = async () => {
     try {
       setFilterData({});
       setPrice(100);
-
-      const res = await getCars();
+  
+      const res = await getCars(1);
       setCars(res.carLists);
+      setTotalPages(res.totalPages || 1);
+      setCurrentPage(1);
     } catch (error) {
       console.error("Filtre sıfırlama sırasında hata:", error);
+      setCars([]);
+      setTotalPages(1);
+      setCurrentPage(1);
     }
     setIsMenu(false);
   };
+  
 
   return (
     <div className="p-4 h-full overflow-y-auto">

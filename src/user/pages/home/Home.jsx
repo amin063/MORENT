@@ -63,34 +63,43 @@ function Home() {
         className={`fixed md:static inset-0 z-40 transform ${isMenu ? "translate-x-0" : "-translate-x-full md:translate-x-0"
           } transition-transform duration-300 md:col-span-2 bg-white shadow-md`}
       >
-        <Sidebar cars={cars} setCars={setCars} isMenu={isMenu} setIsMenu={setIsMenu} />
+        <Sidebar cars={cars} setCars={setCars} setTotalPages={setTotalPages} setCurrentPage={setCurrentPage} isMenu={isMenu} setIsMenu={setIsMenu} />
       </div>
-      {
-        isLoading ? (
-          <div className="col-span-8 flex justify-center items-center w-full h-screen">
-            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        ) : (
 
-          <div className="col-span-1 md:col-span-8 p-4">
-            {cars?.length ? (
+
+
+      <div className="col-span-1 md:col-span-8 p-4">
+        {
+          isLoading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {
+                Array.from({ length: 8 }, (_, index) => <BasicCart key={index} isLoading={true} />)
+              }
+            </div>
+          ) :
+            cars.length ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {cars.map((car) => (
-                  <BasicCart key={car._id} {...car} />
+                  <BasicCart key={car._id} carData={car} isLoading={isLoading} setIsLoading={setIsLoading} />
                 ))}
               </div>
             ) : (
-              <p className="text-center text-gray-500">Maşın tapılmadı</p>
+              <p className="text-center text-gray-500 h-full flex justify-center items-center text-4xl font-bold">Maşın tapılmadı</p>
             )}
+        {
+          cars?.length ? (
             <Pagination
+              cars={cars}
               totalPages={totalPages}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
               setTotalPages={setTotalPages}
             />
-          </div>
-        )
-      }
+          ) : <p></p>
+        }
+      </div>
+
+
 
 
       <button
