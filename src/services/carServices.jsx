@@ -1,8 +1,8 @@
 import { api } from "../api"
 
-export const getCars = async () => {
+export const getCars = async (currentPage) => {
     try {
-        const res = await api.get('/cars')
+        const res = await api.get(`/cars?page=${currentPage}&limit=10`)
         return res.data
     } catch (error) {
         return error.response

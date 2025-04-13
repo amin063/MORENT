@@ -26,6 +26,7 @@ const Sidebar = ({ cars, setCars, isMenu, setIsMenu }) => {
     } catch (error) {
       setCars([]);
     }
+    setIsMenu(false);
   };
 
   const resetFilters = async () => {
@@ -38,10 +39,11 @@ const Sidebar = ({ cars, setCars, isMenu, setIsMenu }) => {
     } catch (error) {
       console.error("Filtre sıfırlama sırasında hata:", error);
     }
+    setIsMenu(false);
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 h-full overflow-y-auto">
       {/* TYPE */}
       <div className="flex flex-col gap-3 mb-6">
         <p className="text-accent font-semibold">TYPE</p>

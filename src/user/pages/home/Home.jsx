@@ -2,17 +2,60 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { getCars } from "../../../services/carServices";
 import BasicCart from "../../components/cart/BasicCart";
+import Pagination from "../../components/pagination/Pagination";
 
 function Home() {
   const [isMenu, setIsMenu] = useState(false);
   const [cars, setCars] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
-    (async () => {
-      const res = await getCars();
-      setCars(res.carLists);
-    })();
-  }, []);
+    const fetchCars = async () => {
+      setIsLoading(true);
+      try {
+        const res = await getCars(currentPage);
+        setCars(res.carLists);
+        setTotalPages(res.totalPages);
+      } catch (error) {
+        console.error("Maşınlar alınmadı:", error);
+      }
+      setIsLoading(false);
+    };
+
+    fetchCars();
+  }, [currentPage]);
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsMenu(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+
+  }, [window.innerWidth]);
+
+  useEffect(() => {
+    if (isMenu) {
+      document.body.style.overflow = "hidden";
+    }
+    else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    }
+
+  }, [isMenu]);
 
   return (
     <div className="h-full w-full grid grid-cols-1 md:grid-cols-10 gap-4 relative">
@@ -22,18 +65,33 @@ function Home() {
       >
         <Sidebar cars={cars} setCars={setCars} isMenu={isMenu} setIsMenu={setIsMenu} />
       </div>
-
-      <div className="col-span-1 md:col-span-8 p-4">
-        {cars?.length ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {cars.map((car) => (
-              <BasicCart key={car._id} {...car} />
-            ))}
+      {
+        isLoading ? (
+          <div className="col-span-8 flex justify-center items-center w-full h-screen">
+            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : (
-          <p className="text-center text-gray-500">Maşın tapılmadı</p>
-        )}
-      </div>
+
+          <div className="col-span-1 md:col-span-8 p-4">
+            {cars?.length ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {cars.map((car) => (
+                  <BasicCart key={car._id} {...car} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-gray-500">Maşın tapılmadı</p>
+            )}
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              setTotalPages={setTotalPages}
+            />
+          </div>
+        )
+      }
+
 
       <button
         onClick={() => setIsMenu(!isMenu)}
@@ -41,6 +99,7 @@ function Home() {
       >
         {isMenu ? "✕" : "☰"}
       </button>
+
     </div>
   );
 }

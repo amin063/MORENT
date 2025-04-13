@@ -11,10 +11,10 @@ const Navbar = () => {
 
   useEffect(() => {
     getUser().then(res => {
-      if (!res.user) {
-        nav('/login');
-        return;
-      }
+      // if (!res.user) {
+      //   nav('/login');
+      //   return;
+      // }
       dispatch(setUser(res));
     });
   }, []);

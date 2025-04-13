@@ -1,0 +1,73 @@
+import React from "react";
+
+const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
+    const generatePages = () => {
+        const pages = [];
+
+        if (totalPages <= 7) {
+            for (let i = 1; i <= totalPages; i++) {
+                pages.push(i);
+            }
+        } else {
+            if (currentPage <= 4) {
+                pages.push(1, 2, 3, 4, 5, "...", totalPages);
+            } else if (currentPage >= totalPages - 3) {
+                pages.push(1, "...", totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+            } else {
+                pages.push(1, "...", currentPage - 1, currentPage, currentPage + 1, "...", totalPages);
+            }
+        }
+
+        return pages;
+    };
+
+    const handleClick = (page) => {
+        if (page === "...") return;
+        setCurrentPage(page);
+    };
+
+    const handleNext = () => {
+        setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+    };
+
+    const handlePrev = () => {
+        setCurrentPage((prev) => Math.max(prev - 1, 1));
+    };
+
+    return (
+        <div className="flex justify-center items-center gap-2 my-6">
+            <button
+                onClick={handlePrev}
+                disabled={currentPage === 1}
+                className="px-3 py-1 rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+            >
+                Prev
+            </button>
+
+            {generatePages().map((page, index) => (
+                <button
+                    key={index}
+                    onClick={() => handleClick(page)}
+                    className={`px-3 py-1 rounded-md border ${
+                        page === currentPage
+                            ? "bg-primary text-white shadow-md scale-105"
+                            : "bg-white text-gray-700 hover:bg-gray-100"
+                    } transition-all duration-200 ${page === "..." && "cursor-default border-none bg-transparent hover:bg-transparent"}`}
+                    disabled={page === "..."}
+                >
+                    {page}
+                </button>
+            ))}
+
+            <button
+                onClick={handleNext}
+                disabled={currentPage === totalPages}
+                className="px-3 py-1 rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+            >
+                Next
+            </button>
+        </div>
+    );
+};
+
+export default Pagination;

@@ -11,6 +11,7 @@ import Login from "../user/pages/auth/login/Login";
 import Register from "../user/pages/auth/register/Register";
 import FavCars from '../user/pages/favCars/FavCars'
 import Contact from '../user/pages/contact/Contact'
+import ProtectedRoute from "../user/components/protectedroute/ProtectedRoute";
 // ADMIN Pages
 import Dashboard from "../admin/pages/dashboard/dashboard";
 import CarRent from "../admin/pages/carRent/carRent";
@@ -25,7 +26,8 @@ function AppRoutes() {
     return (
         <Routes>
             {/* USER Routes */}
-            <Route path='/' element={<UserLayout />}>
+            <Route path='/' element={<ProtectedRoute><UserLayout /></ProtectedRoute>}
+            >
                 <Route index element={<Home />} />
                 <Route path='details/:id' element={<Details />} />
                 <Route path='payment/:id' element={<Payment />} />

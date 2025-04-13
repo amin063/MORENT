@@ -40,20 +40,8 @@ function BasicCart(carData) {
     }
   }, []);
 
-  useEffect(() => {
-    getUser().then((res) => {
-      dis(setUser(res));
-    });
-  }, [isLiked]);
-
   const setLike = async () => {
-    setData({
-      ...data,
-      userId: user._id,
-      carId: carData._id,
-    });
-    const res = await addToFav(data);
-    if (res.message === "Maşın favoritlərə əlavə edildi") {
+    if (!isLiked) {
       setAnimationClass("animate-shrink");
       dis(addFav(data.carId));
     } else {
@@ -63,6 +51,17 @@ function BasicCart(carData) {
 
     setTimeout(() => setAnimationClass(""), 300);
     setIsLiked(!isLiked);
+    setData({
+      ...data,
+      userId: user._id,
+      carId: carData._id,
+    });
+    const res = await addToFav(data);
+    console.log(res)
+    getUser().then((res) => {
+      dis(setUser(res));
+    });
+
   };
 
   return (
