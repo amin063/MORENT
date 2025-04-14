@@ -41,6 +41,11 @@ const Reimburse = () => {
     requestAnimationFrame(animateCount);
   }, [rentHistory.length]);
 
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Intl.DateTimeFormat("en-US", options).format(new Date(dateString));
+  };
+
   return (
     <div className="p-6 bg-gray-100 max-w-5xl mx-auto h-auto">
       {/* Sayfa Başlığı */}
@@ -75,7 +80,7 @@ const Reimburse = () => {
                 <td className="px-4 py-3 text-gray-700">{rent.carName}</td>
                 <td className="px-4 py-3 text-gray-700">${rent.total}</td>
                 <td className="px-4 py-3 text-gray-700">{rent.username}</td>
-                <td className="px-4 py-3 text-gray-700">{rent.date}</td>
+                <td className="px-4 py-3 text-gray-700">{formatDate(rent.date)}</td>
               </tr>
             ))}
           </tbody>

@@ -9,12 +9,24 @@ import { useParams } from "react-router-dom";
 
 const CarSwiper = () => {
   const [cars, setCars] = useState([])
-  const {id} = useParams()
+  const { id } = useParams()
+  const [isLoading, setIsLoading] = useState(true)
   console.log(id)
   useEffect(() => {
-    getCars().then(res => setCars(res.carLists))
-  }, [])
-  
+    const fetchCars = async () => {
+      setIsLoading(true);
+      try {
+        const res = await getCars();
+        setCars(res.carLists);
+      } catch (error) {
+        console.error("Maşınlar yüklənərkən xəta baş verdi:", error);
+      }
+      setIsLoading(false);
+    };
+    fetchCars();
+  }, []);
+
+
   return (
     <div className="w-full">
       <Swiper
@@ -42,12 +54,37 @@ const CarSwiper = () => {
       >
         {/* Kartlar */}
         {
-          cars.filter(car => !car.rentDay && car._id !== id).map(car => (
-            <SwiperSlide key={car._id}>
-              
-              <BasicCart key={car._id} {...car} />
-            </SwiperSlide>
-          ))}
+          isLoading ? (
+            <div>
+              <div className="gap-10 hidden lg:flex">
+                <BasicCart isLoading={true} />
+                <BasicCart isLoading={true} />
+                <BasicCart isLoading={true} />
+                <BasicCart isLoading={true} />
+              </div>
+
+              <div className="hidden gap-10 md:flex">
+                <BasicCart isLoading={true} />
+                <BasicCart isLoading={true} />
+                <BasicCart isLoading={true} />
+              </div>
+
+              <div className="hidden gap-10 justify-center items-center sm:flex">
+                <BasicCart isLoading={true} />
+              </div>
+
+              <div>
+
+              </div>
+            </div>
+          ) : (
+            cars.filter(car => !car.rentDay && car._id !== id).map(car => (
+              <SwiperSlide key={car._id}>
+                <BasicCart key={car._id} carData={car} />
+              </SwiperSlide>
+            ))
+          )
+        }
       </Swiper>
     </div>
   );

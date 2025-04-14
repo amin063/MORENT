@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import { getUser, logout } from '../../../services/userServices';
 import { setUser } from '../../../redux/slices/userSlice';
 import { Link, useNavigate } from "react-router-dom";
+import { Search } from "@mui/icons-material";
+import Searchbar from "../../components/searchbar/Searchbar";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -29,10 +31,15 @@ const Navbar = () => {
 
   return (
     <div className="w-full shadow bg-white top-0 left-0 z-50">
-      <div className="flex items-center w-[85%] mx-auto justify-between bg-white text-primary h-[80px]">
+      <div className="flex items-center gap-5 w-[85%] mx-auto justify-between bg-white text-primary h-[80px]">
         <Link to={"/"} className="text-2xl font-bold text-blue-600 cursor-pointer">
           MORENT
         </Link>
+
+        {/* <Searchbar /> */}
+        <div className="hidden sm:flex items-center w-full">
+          <Searchbar />
+        </div>
 
         <div className="relative group">
           <div className="flex items-center space-x-4 cursor-pointer">
@@ -40,7 +47,7 @@ const Navbar = () => {
               {user ? user.username : "Login"}
             </p>
           </div>
-          
+
           <div className="absolute top-full right-0 w-48 bg-white shadow-lg rounded-lg mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
             <div className="flex flex-col p-2">
               {user && (
@@ -71,6 +78,9 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="w-full px-8 h-[60px] flex sm:hidden items-center justify-center">
+        <Searchbar />
       </div>
     </div>
   );

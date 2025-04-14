@@ -23,8 +23,6 @@ const Confirmation = ({formData, setFormData }) => {
         
     }
     return (
-        
-        
         <div className='bg-white flex flex-col gap-5 p-5 rounded-md'>
             <InfoBox title={"Bildirim🔔"} message={mes} isOpen={isMessage} setIsOpen={setIsMessage}/>
             {/* HEADER */}

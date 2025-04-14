@@ -89,8 +89,8 @@ function BasicCart({carData,  isLoading, setIsLoading }) {
       <div className="p-4">
         <div className="flex justify-between items-center mb-4">
           <div>
-            <p className="font-bold text-lg text-gray-800">{carData.name}</p>
-            <p className="text-sm text-gray-500">{carData.type}</p>
+            <p className="font-bold text-lg text-gray-800">{carData?.name}</p>
+            <p className="text-sm text-gray-500">{carData?.type}</p>
           </div>
           <div onClick={setLike} className="cursor-pointer">
             {isLiked ? likedIcon : unLikedIcon}
@@ -99,7 +99,7 @@ function BasicCart({carData,  isLoading, setIsLoading }) {
 
         <div className="w-full h-40 mb-3">
           <img
-            src={carData.img}
+            src={carData?.img}
             alt="Car"
             className="w-full h-full object-contain rounded-lg mb-4"
           />
@@ -108,15 +108,15 @@ function BasicCart({carData,  isLoading, setIsLoading }) {
         <div className="flex justify-between items-center text-gray-600 text-sm mb-4">
           <div className="flex items-center space-x-2">
             <BsFillFuelPumpFill className="text-gray-500" />
-            <span>{carData.fuelCapacity}L</span>
+            <span>{carData?.fuelCapacity}L</span>
           </div>
           <div className="flex items-center space-x-2">
             <BsFillFuelPumpFill className="text-gray-500" />
-            <span>{carData.driveType}</span>
+            <span>{carData?.driveType}</span>
           </div>
           <div className="flex items-center space-x-2">
             <BsFillFuelPumpFill className="text-gray-500" />
-            <span>{carData.capacity} People</span>
+            <span>{carData?.capacity} People</span>
           </div>
         </div>
 
@@ -125,7 +125,7 @@ function BasicCart({carData,  isLoading, setIsLoading }) {
             ${carData?.price} <span className="text-sm text-gray-500">/ day</span>
           </p>
           <Link
-            to={`/details/${carData._id}`}
+            to={`/details/${carData?._id}`}
             className="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark transition-colors duration-300"
           >
             Rent Now

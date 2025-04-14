@@ -3,10 +3,12 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import { getCars } from "../../../services/carServices";
 import BasicCart from "../../components/cart/BasicCart";
 import Pagination from "../../components/pagination/Pagination";
+import Searchbar from "../../components/searchbar/Searchbar";
 
 function Home() {
   const [isMenu, setIsMenu] = useState(false);
   const [cars, setCars] = useState([]);
+  const [filteredCars, setFilteredCars] = useState(cars);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,6 +20,7 @@ function Home() {
       try {
         const res = await getCars(currentPage);
         setCars(res.carLists);
+        setFilteredCars(res.carLists);
         setTotalPages(res.totalPages);
       } catch (error) {
         console.error("Maşınlar alınmadı:", error);

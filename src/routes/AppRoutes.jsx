@@ -21,6 +21,7 @@ import Settings from "../admin/pages/settings/settings";
 import CarList from "../admin/pages/carList/carList";
 import AdminLogin from "../admin/pages/auth/adminLogin";
 import NotFound from "../user/pages/notFound/notFound";
+import Faq from "../user/pages/faq/Faq";
 
 function AppRoutes() {
     return (
@@ -33,6 +34,7 @@ function AppRoutes() {
                 <Route path='payment/:id' element={<Payment />} />
                 <Route path='favCars' element={<FavCars />} />
                 <Route path='contact' element={<Contact />} />
+                <Route path='faq' element={<Faq />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

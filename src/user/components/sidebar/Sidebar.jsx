@@ -24,7 +24,7 @@ const Sidebar = ({ cars, setCars, setTotalPages, setCurrentPage, isMenu, setIsMe
       const res = await filterCars({ type, capacity, price });
   
       setCars(res.cars);
-      setTotalPages(res.totalPages || 1);  // server bunu göndərməlidir!
+      setTotalPages(res.totalPages || 1);
       setCurrentPage(1);
     } catch (error) {
       setCars([]);
