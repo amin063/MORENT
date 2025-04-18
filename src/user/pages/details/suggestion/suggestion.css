@@ -1,17 +1,82 @@
 /* Swiper'ın çevresindeki alan için ekstra padding */
 .mySwiper {
-  padding: 10px 0;
+  padding: 20px 0;  /* Hem üst hem de alt kısmı arttırdık */
 }
 
 /* Mobil ve farklı ekran boyutlarında hizalamalar */
 @media (max-width: 768px) {
+  /* Swiper öğelerinin daha uyumlu hale gelmesi için genişliği %100 yapıyoruz */
   .swiper-slide > div {
-    max-width: 100%;
+    max-width: 100%;  
+    padding: 10px;
+  }
+
+  .swiper-slide {
+    margin-bottom: 20px; /* Öğeler arasında daha fazla boşluk */
+  }
+
+  /* Başlık ve "View All" kısmının hizalanmasını simetrik yapıyoruz */
+  .text-accent {
+    font-size: 16px;
+  }
+
+  h4 {
+    font-size: 18px; /* Mobilde başlığı biraz daha küçük yapalım */
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Tablet ekranları için */
+  .swiper-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px; /* Aralarına boşluk bırakıyoruz */
+    justify-items: center; /* Öğeleri ortalıyoruz */
+  }
+
+  .swiper-slide > div {
+    max-width: 100%;  /* Tam genişlikte olsun */
+    padding: 10px;
+  }
+
+  .swiper-slide {
+    margin-bottom: 20px; /* Öğeler arasına boşluk bırakıyoruz */
+  }
+
+  /* Başlık kısmının hizalanmasını sağlıyoruz */
+  .text-accent {
+    font-size: 18px;
+  }
+
+  h4 {
+    font-size: 22px; /* Tablet için başlık büyüklüğünü arttırıyoruz */
+  }
+}
+
+@media (min-width: 1025px) {
+  /* Masaüstü görünümde Swiper öğelerinin genişliğini belirliyoruz */
+  .swiper-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 öğe bir satırda */
+    gap: 20px; /* Aralarına boşluk bırakıyoruz */
+    justify-items: center; /* Öğeleri ortalıyoruz */
+  }
+
   .swiper-slide > div {
     max-width: 280px;
+    padding: 10px;
+  }
+
+  .swiper-slide {
+    margin-bottom: 30px; /* Aralarına biraz daha boşluk */
+  }
+
+  /* Başlık kısmının hizalanmasını sağlıyoruz */
+  .text-accent {
+    font-size: 18px;
+  }
+
+  h4 {
+    font-size: 22px; /* Masaüstü için başlık daha büyük */
   }
 }
