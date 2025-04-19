@@ -72,8 +72,7 @@
 
     // export default Pagination;
 
-
-    import React from "react";
+import React from "react";
 
 const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
     const generatePages = () => {

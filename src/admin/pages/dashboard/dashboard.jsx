@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { deleteCar } from "../../../services/carServices";
-import { FaSearch } from "react-icons/fa"; // Arama ikonu için
+import { FaSearch } from "react-icons/fa";
+import ConfirmModal from "../../components/modal/ConfirmModal";
 
 const Dashboard = () => {
   const [cars, setCars] = useState([]);
   const [sortOption, setSortOption] = useState("rent");
   const [searchQuery, setSearchQuery] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCarId, setSelectedCarId] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    fetch("https://morentapi.onrender.com/api/cars")
+    fetch("https://morentapi.onrender.com/api/allcars")
       .then((res) => res.json())
-      .then((data) => setCars(data.carLists))
+      .then((data) => setCars(data.cars))
       .catch((error) => console.error("Error fetching cars:", error));
   }, []);
 
@@ -18,13 +22,34 @@ const Dashboard = () => {
     setCars((prevCars) => [...prevCars, newCar]);
   };
 
-  const handleDeleteCar = async (carId) => {
+  const handleDeleteClick = (carId) => {
+    const car = cars.find((c) => c._id === carId);
+    if (car.rentDetails) {
+      setErrorMessage("Bu maşın hal-hazırda kirayədədir!");
+      setIsModalOpen(true);
+    } else {
+      setSelectedCarId(carId);
+      setErrorMessage("");
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (errorMessage) {
+      setIsModalOpen(false);
+      setErrorMessage("");
+      return;
+    }
+
     try {
-      const res = await deleteCar(carId);
+      const res = await deleteCar(selectedCarId);
       console.log(res + " 21");
-      setCars((prevCars) => prevCars.filter((car) => car._id !== carId));
+      setCars((prevCars) => prevCars.filter((car) => car._id !== selectedCarId));
     } catch (error) {
       console.error("Error deleting car:", error);
+    } finally {
+      setIsModalOpen(false);
+      setSelectedCarId(null);
     }
   };
 
@@ -59,6 +84,17 @@ const Dashboard = () => {
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setErrorMessage("");
+        }}
+        onConfirm={handleDeleteConfirm}
+        title={errorMessage ? "Xəta" : "Təsdiq"}
+        message={errorMessage || "Bu maşını silmək istədiyinizdən əminsiniz?"}
+      />
+
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-gray-800">Car Rental</h1>
         <p className="text-gray-600 mt-2">
@@ -105,7 +141,7 @@ const Dashboard = () => {
               className="bg-white rounded-xl shadow-md flex flex-col sm:flex-row overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-lg relative"
             >
               <button
-                onClick={() => handleDeleteCar(car._id)}
+                onClick={() => handleDeleteClick(car._id)}
                 className="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition-colors duration-300"
               >
                 Delete
