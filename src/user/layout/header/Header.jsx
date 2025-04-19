@@ -30,7 +30,7 @@ const Navbar = () => {
   const { user } = useSelector((state) => state.user);
 
   return (
-    <div className="w-full shadow bg-white top-0 left-0 z-50">
+    <div className="w-full shadow bg-white top-0 left-0 z-40">
       <div className="flex items-center gap-5 w-[85%] mx-auto justify-between bg-white text-primary h-[80px]">
         <Link to={"/"} className="text-2xl font-bold text-blue-600 cursor-pointer">
           MORENT

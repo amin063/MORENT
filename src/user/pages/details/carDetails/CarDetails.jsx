@@ -7,8 +7,8 @@ import { useParams } from 'react-router-dom';
 const CarDetails = () => {
     const [carData, setCarData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [isModalOpen, setIsModalOpen] = useState(false); // Modal durumu
-    const [selectedImage, setSelectedImage] = useState(null); // Seçilen büyük görsel
+    const [isModalOpen, setIsModalOpen] = useState(false); 
+    const [selectedImage, setSelectedImage] = useState(null);
     const { id } = useParams();
 
     useEffect(() => {
@@ -25,14 +25,14 @@ const CarDetails = () => {
     const handleImageClick = (imgSrc) => {
         setSelectedImage(imgSrc);
         setIsModalOpen(true);
-        document.body.style.overflow = 'hidden'; // Modal açıldığında sayfa kaymasını engelle
+        document.body.style.overflow = 'hidden'; 
     };
 
-    // Modal dışına tıklayınca kapanacak
+    
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectedImage(null);
-        document.body.style.overflow = 'auto'; // Modal kapandıktan sonra sayfa kaymasını aç
+        document.body.style.overflow = 'auto';
     };
 
     if (loading) {
@@ -85,10 +85,6 @@ const CarDetails = () => {
                     {/* Title and Likes */}
                     <div className='flex justify-between items-center'>
                         <h1 className='font-bold text-3xl text-primary'>{carData.name}</h1>
-                        <div className='flex gap-2 items-center'>
-                            <FaHeart className='text-red-500' />
-                            <p className='font-semibold text-[#596780]'>{carData.likes} Likes</p>
-                        </div>
                     </div>
 
                     {/* Description */}

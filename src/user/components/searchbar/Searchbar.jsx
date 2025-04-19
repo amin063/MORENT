@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Search } from 'lucide-react'; // modern ikon eklendi
+import { Search } from 'lucide-react';
 
 const Searchbar = () => {
   const [searchValue, setSearchValue] = useState("");
