@@ -25,7 +25,7 @@ const Dashboard = () => {
   const handleDeleteClick = (carId) => {
     const car = cars.find((c) => c._id === carId);
     if (car.rentDetails) {
-      setErrorMessage("Bu maşın hal-hazırda kirayədədir!");
+      setErrorMessage("This car is currently rented!");
       setIsModalOpen(true);
     } else {
       setSelectedCarId(carId);
@@ -43,7 +43,6 @@ const Dashboard = () => {
 
     try {
       const res = await deleteCar(selectedCarId);
-      console.log(res + " 21");
       setCars((prevCars) => prevCars.filter((car) => car._id !== selectedCarId));
     } catch (error) {
       console.error("Error deleting car:", error);
@@ -80,10 +79,8 @@ const Dashboard = () => {
     car.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  console.log(cars);
-
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-8 bg-gray-50 min-h-screen">
       <ConfirmModal
         isOpen={isModalOpen}
         onClose={() => {
@@ -91,34 +88,31 @@ const Dashboard = () => {
           setErrorMessage("");
         }}
         onConfirm={handleDeleteConfirm}
-        title={errorMessage ? "Xəta" : "Təsdiq"}
-        message={errorMessage || "Bu maşını silmək istədiyinizdən əminsiniz?"}
+        title={errorMessage ? "Error" : "Confirm"}
+        message={errorMessage || "Are you sure you want to delete this car?"}
       />
 
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-gray-800">Car Rental</h1>
-        <p className="text-gray-600 mt-2">
-          Choose your desired car and book it today!
-        </p>
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-semibold text-gray-900">Car Rental</h1>
+        <p className="text-gray-600 mt-2">Choose your desired car and book it today!</p>
       </div>
 
-      {/* Arama ve Sıralama Bileşenleri */}
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-        {/* Arama Input'u */}
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-6">
+        {/* Search Input */}
         <div className="w-full sm:w-1/2 relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <FaSearch className="text-gray-400" /> {/* Arama ikonu */}
+            <FaSearch className="text-gray-400" />
           </div>
           <input
             type="text"
             placeholder="Search for a car..."
             value={searchQuery}
             onChange={handleSearchChange}
-            className="w-full pl-10 pr-4 py-3 border placeholder:text-base border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm hover:shadow-md"
+            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm hover:shadow-md"
           />
         </div>
 
-        {/* Sıralama Dropdown'u */}
+        {/* Sort Dropdown */}
         <div className="w-full sm:w-1/2 sm:text-right">
           <select
             value={sortOption}
@@ -132,49 +126,38 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Uzunlamasına kartlar */}
-      <div className="flex flex-col gap-6 px-4">
-        {filteredCars?.length > 0 ? (
+      {/* Car Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {filteredCars.length > 0 ? (
           filteredCars.map((car) => (
             <div
               key={car._id}
-              className="bg-white rounded-xl shadow-md flex flex-col sm:flex-row overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-lg relative"
+              className="bg-white rounded-xl shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-xl relative overflow-hidden"
             >
               <button
                 onClick={() => handleDeleteClick(car._id)}
-                className="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition-colors duration-300"
+                className="absolute top-4 right-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors duration-300"
               >
                 Delete
               </button>
-              <div className="w-[350px] h-[295px] bg-gray-200 flex items-center justify-center overflow-hidden rounded-lg">
-                <img src={car.img} alt={car.name} className="w-full h-full object-contain" />
+              <div className="w-full h-48 sm:h-64 bg-gray-200 flex items-center justify-center overflow-hidden rounded-t-lg">
+                <img
+                  src={car.img}
+                  alt={car.name}
+                  className="w-full h-full object-cover"
+                />
               </div>
-
-              {/* <img
-                src={car.img}
-                alt={car.name}
-                // className="w-full sm:w-1/3 h-48 sm:h-auto object-cover"
-              /> */}
-              <div className="p-4 flex flex-col justify-between w-full">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                    {car.name}
-                  </h2>
-                  <p className="text-gray-600 mb-2">
-                    {car.desc || "No description available."}
-                  </p>
-                  <div className="flex items-baseline mb-2">
-                    <span className="text-2xl font-bold text-gray-900">
-                      ${car.price}
-                    </span>
-                    <span className="text-sm text-gray-500 ml-1">/ day</span>
-                  </div>
+              <div className="p-6">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-3">{car.name}</h2>
+                <p className="text-gray-600 mb-4">{car.desc || "No description available."}</p>
+                <div className="flex items-baseline mb-4">
+                  <span className="text-2xl font-semibold text-gray-900">${car.price}</span>
+                  <span className="text-sm text-gray-500 ml-2">/ day</span>
                 </div>
-                <div className="flex items-center justify-between mt-4">
+                <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div
-                      className={`w-3 h-3 rounded-full ${car.rentDetails ? "bg-green-500" : "bg-red-500"
-                        }`}
+                      className={`w-3 h-3 rounded-full ${car.rentDetails ? "bg-green-500" : "bg-red-500"}`}
                     ></div>
                     <span className="text-sm text-gray-600">
                       {car.rentDetails ? "Rented" : "Available"}

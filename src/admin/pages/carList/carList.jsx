@@ -29,123 +29,75 @@ const AdminForm = ({ onCarAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await addCar(formData);
-      setMessage("Car added successfully!");
+      await addCar(formData);
+      setMessage("Vehicle successfully registered.");
+      if (onCarAdded) onCarAdded();
     } catch (err) {
-      console.log(err + " catchdadi");
+      console.log("Error while adding car:", err);
     }
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen flex items-center justify-center">
-      <div className="bg-white shadow-xl rounded-xl p-8 max-w-2xl w-full">
-        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
-          Admin Panel - Add New Car
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-3xl bg-white rounded-xl shadow-xl p-10 border border-blue-100">
+        <h1 className="text-3xl font-bold text-blue-700 text-center mb-8">
+          Admin Panel – Register Vehicle
         </h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {[
+            { label: "Vehicle Name", name: "name", type: "text" },
+            { label: "Description", name: "desc", type: "textarea" },
+            { label: "Vehicle Type", name: "type", type: "text" },
+            { label: "Capacity", name: "capacity", type: "number" },
+            { label: "Drive Type", name: "driveType", type: "text" },
+            { label: "Fuel Capacity (Liters)", name: "fuelCapacity", type: "number" },
+            { label: "Daily Price ($)", name: "price", type: "number" },
+          ].map((field, index) => (
+            <div key={index}>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {field.label}
+              </label>
+              {field.type === "textarea" ? (
+                <textarea
+                  name={field.name}
+                  onChange={inputChange}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  required
+                />
+              ) : (
+                <input
+                  type={field.type}
+                  name={field.name}
+                  onChange={inputChange}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  required
+                />
+              )}
+            </div>
+          ))}
+
           <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Car Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              onChange={inputChange}
-              className="mt-1 p-3 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Car Image
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Vehicle Image
             </label>
             <input
               type="file"
               accept="image/*"
               onChange={handleImageUpload}
-              className="mt-1 p-3 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
               required
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Explanation
-            </label>
-            <textarea
-              name="desc"
-              onChange={inputChange}
-              className="mt-1 p-3 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Car Type
-            </label>
-            <input
-              type="text"
-              name="type"
-              onChange={inputChange}
-              className="mt-1 p-3 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Capacity
-            </label>
-            <input
-              type="number"
-              name="capacity"
-              onChange={inputChange}
-              className="mt-1 p-3 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Traction Type
-            </label>
-            <input
-              type="text"
-              name="driveType"
-              onChange={inputChange}
-              className="mt-1 p-3 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Fuel Capacity (Liters)
-            </label>
-            <input
-              type="number"
-              name="fuelCapacity"
-              onChange={inputChange}
-              className="mt-1 p-3 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Daily Price ($)
-            </label>
-            <input
-              type="number"
-              name="price"
-              onChange={inputChange}
-              className="mt-1 p-3 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              required
-            />
-          </div>
+
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition duration-300 shadow-md"
+            className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition duration-300 font-semibold tracking-wide"
           >
-            Add Car
+            Submit
           </button>
+
           {message && (
-            <p className="mt-4 text-green-600 text-center font-semibold">
+            <p className="mt-4 text-green-600 text-center font-medium">
               {message}
             </p>
           )}

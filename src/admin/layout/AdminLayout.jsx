@@ -33,25 +33,27 @@ function AdminLayout() {
   }
 
   return (
-    <div className="flex h-screen w-full max-w-[2000px] mx-auto overflow-hidden">
-      {/* Navbar */}
-      <div className="absolute top-0 w-full z-10">
-        <Header/>
-      </div>
+<div className="flex flex-col h-screen w-full max-w-[2000px] mx-auto">
+  {/* Navbar */}
+  <div className="h-[64px] sticky top-0 z-10">
+    <Header />
+  </div>
 
-      {/* Ana İçerik */}
-      <div className="flex flex-grow h-full pt-[64px]">
-        {/* Sidebar */}
-        <div className="w-[250px] h-full bg-white shadow-md">
-          <Sidebar />
-        </div>
-
-        {/* Main Content */}
-        <main className="flex-grow overflow-auto p-6 bg-gray-50">
-          <Outlet />
-        </main>
-      </div>
+  {/* İçerik */}
+  <div className="flex flex-1 overflow-hidden">
+    {/* Sidebar */}
+    <div className="w-[250px] bg-white shadow-md hidden md:block">
+      <Sidebar />
     </div>
+
+    {/* Main Content */}
+    <main className="flex-1 overflow-y-auto p-6 bg-gray-50">
+      <Outlet />
+    </main>
+  </div>
+</div>
+
+
   );
 }
 

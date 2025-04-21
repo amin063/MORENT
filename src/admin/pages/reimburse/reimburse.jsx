@@ -18,11 +18,10 @@ const Reimburse = () => {
     const end = rentHistory.length;
     if (start === end) return;
 
-    // Daha yumuşak bir animasyon için easeOutQuad fonksiyonu
     const easeOutQuad = (t) => t * (2 - t);
 
-    const duration = 1000; // Animasyon süresi (ms)
-    const incrementTime = 10; // Her adım arasındaki süre (ms)
+    const duration = 1000;
+    const incrementTime = 10;
     let startTime = null;
 
     const animateCount = (timestamp) => {
@@ -47,40 +46,40 @@ const Reimburse = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 max-w-5xl mx-auto h-auto">
-      {/* Sayfa Başlığı */}
-      <div className="text-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Reimbursement Requests</h1>
-        <p className="text-gray-600 text-base">Manage and track your reimbursement claims</p>
+    <div className="p-6 bg-gray-50 max-w-6xl mx-auto h-auto rounded-xl">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-semibold text-gray-800">Reimbursement Requests</h1>
+        <p className="text-gray-500 text-lg">Manage and track your reimbursement claims efficiently</p>
       </div>
 
-      {/* Başvuru Durumu Kartı */}
-      <div className="flex justify-center mb-6">
-        <div className="bg-white p-6 shadow-lg rounded-xl text-center w-64 border border-gray-300">
+      <div className="flex justify-center mb-8">
+        <div className="bg-white p-8 shadow-xl rounded-xl text-center w-72 border border-gray-300 hover:shadow-2xl transition-all">
           <h3 className="text-lg font-semibold text-gray-700">Total Pending</h3>
-          <p className="text-2xl font-bold text-blue-600">{animatedCount}</p>
+          <p className="text-3xl font-bold text-blue-600">{animatedCount}</p>
         </div>
       </div>
 
-      {/* Başvuru Listesi */}
-      <div className="bg-white p-6 shadow-lg rounded-xl border border-gray-300">
-        <h3 className="text-xl font-semibold text-gray-700 mb-4">Recent Reimbursement Requests</h3>
+      <div className="bg-white p-8 shadow-xl rounded-xl border border-gray-300">
+        <h3 className="text-2xl font-semibold text-gray-800 mb-6">Recent Reimbursement Requests</h3>
         <table className="w-full bg-white border border-gray-200 rounded-lg">
           <thead>
-            <tr className="border-b bg-gray-100 text-gray-700 text-base">
-              <th className="px-4 py-3 text-left">Name</th>
-              <th className="px-4 py-3 text-left">Amount</th>
-              <th className="px-4 py-3 text-left">Username</th>
-              <th className="px-4 py-3 text-left">Date</th>
+            <tr className="border-b bg-gray-200 text-gray-700 text-sm">
+              <th className="px-6 py-4 text-left">Name</th>
+              <th className="px-6 py-4 text-left">Amount</th>
+              <th className="px-6 py-4 text-left">Username</th>
+              <th className="px-6 py-4 text-left">Date</th>
             </tr>
           </thead>
           <tbody>
             {rentHistory.map((rent, index) => (
-              <tr key={index} className="border-t hover:bg-gray-50 transition text-base">
-                <td className="px-4 py-3 text-gray-700">{rent.carName}</td>
-                <td className="px-4 py-3 text-gray-700">${rent.total}</td>
-                <td className="px-4 py-3 text-gray-700">{rent.username}</td>
-                <td className="px-4 py-3 text-gray-700">{formatDate(rent.date)}</td>
+              <tr
+                key={index}
+                className="border-t hover:bg-gray-50 transition text-base"
+              >
+                <td className="px-6 py-4 text-gray-700">{rent.carName}</td>
+                <td className="px-6 py-4 text-gray-700">${rent.total}</td>
+                <td className="px-6 py-4 text-gray-700">{rent.username}</td>
+                <td className="px-6 py-4 text-gray-700">{formatDate(rent.date)}</td>
               </tr>
             ))}
           </tbody>
