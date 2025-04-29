@@ -1,90 +1,91 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 const EditModal = ({ isOpen, onClose, carData, onSave }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    price: "",
-    capacity: "",
-    desc: "",
-  });
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     if (carData) {
-      setFormData({
-        name: carData.name || "",
-        price: carData.price || "",
-        capacity: carData.capacity || "",
-        desc: carData.desc || "",
-      });
+      setFormData({ ...carData });
     }
   }, [carData]);
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
+    const { name, value } = e.target;
+    setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: name === 'price' ? parseFloat(value) : value
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ ...carData, ...formData }); // carData'daki _id'yi koruyoruz
+    onSave(formData);
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
-      <div className="bg-white rounded-lg p-8 w-96 shadow-lg">
-        <h2 className="text-2xl font-semibold mb-6 text-gray-800">Edit Car</h2>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <h2 className="text-2xl font-bold mb-6">Edit Car Details</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-          <input
-            type="number"
-            name="price"
-            placeholder="Price"
-            value={formData.price}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-          <input
-            type="number"
-            name="capacity"
-            placeholder="Capacity"
-            value={formData.capacity}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <textarea
-            name="desc"
-            placeholder="Description"
-            value={formData.desc}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-            rows="3"
-          />
-          <div className="flex justify-end gap-4 mt-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name || ''}
+              onChange={handleChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Description</label>
+            <textarea
+              name="desc"
+              value={formData.desc || ''}
+              onChange={handleChange}
+              rows="3"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Price (per day)</label>
+            <input
+              type="number"
+              name="price"
+              value={formData.price || ''}
+              onChange={handleChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Image URL</label>
+            <input
+              type="text"
+              name="img"
+              value={formData.img || ''}
+              onChange={handleChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="flex justify-end space-x-4 mt-6">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition"
+              className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
             >
-              Save
+              Save Changes
             </button>
           </div>
         </form>

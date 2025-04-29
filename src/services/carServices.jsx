@@ -3,11 +3,8 @@ import axios from "axios";
 
 export const updateCar = async (carId, updatedCarData) => {
   try {
-    const response = await axios.put(
-      `https://morentapi.onrender.com/api/cars/${carId}`,
-      updatedCarData
-    );
-    return response.data.updatedCar;
+    const response = await api.put(`/updatecar/${carId}`, updatedCarData);
+    return response.data.car;
   } catch (error) {
     console.error("Error updating car:", error);
     throw error;

@@ -12,6 +12,7 @@ const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCarId, setSelectedCarId] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedCarData, setSelectedCarData] = useState(null);
 
@@ -50,8 +51,11 @@ const Dashboard = () => {
       setCars((prevCars) =>
         prevCars.filter((car) => car._id !== selectedCarId)
       );
+      setSuccessMessage("Car deleted successfully!");
+      setTimeout(() => setSuccessMessage(""), 3000);
     } catch (error) {
-      console.error("Error deleting car:", error);
+      setErrorMessage("Error deleting car");
+      setTimeout(() => setErrorMessage(""), 3000);
     } finally {
       setIsModalOpen(false);
       setSelectedCarId(null);
@@ -84,13 +88,44 @@ const Dashboard = () => {
   const filteredCars = cars?.filter((car) =>
     car.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
   const handleEditClick = (car) => {
     setSelectedCarData(car);
     setIsEditModalOpen(true);
+    setErrorMessage("");
+    setSuccessMessage("");
+  };
+
+  const handleUpdateCar = async (updatedCarData) => {
+    try {
+      const updatedCar = await updateCar(updatedCarData._id, updatedCarData);
+      setCars((prevCars) =>
+        prevCars.map((car) =>
+          car._id === updatedCar._id ? updatedCar : car
+        )
+      );
+      setIsEditModalOpen(false);
+      setSelectedCarData(null);
+      setSuccessMessage("Car updated successfully!");
+      setTimeout(() => setSuccessMessage(""), 3000);
+    } catch (error) {
+      setErrorMessage(error.response?.data?.message || "Error updating car");
+      setTimeout(() => setErrorMessage(""), 3000);
+    }
   };
 
   return (
     <div className="p-8 bg-gray-50 min-h-screen">
+      {errorMessage && (
+        <div className="fixed top-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded z-50">
+          {errorMessage}
+        </div>
+      )}
+      {successMessage && (
+        <div className="fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded z-50">
+          {successMessage}
+        </div>
+      )}
       <ConfirmModal
         isOpen={isModalOpen}
         onClose={() => {
@@ -103,25 +138,12 @@ const Dashboard = () => {
       />
       <EditModal
         isOpen={isEditModalOpen}
-        onClose={() => setIsEditModalOpen(false)}
-        carData={selectedCarData}
-        onSave={async (updatedCarData) => {
-          try {
-            const updatedCar = await updateCar(
-              updatedCarData._id,
-              updatedCarData
-            );
-            setCars((prevCars) =>
-              prevCars.map((car) =>
-                car._id === updatedCar._id ? updatedCar : car
-              )
-            );
-            setIsEditModalOpen(false);
-            setSelectedCarData(null);
-          } catch (error) {
-            console.error("Error updating car:", error);
-          }
+        onClose={() => {
+          setIsEditModalOpen(false);
+          setErrorMessage("");
         }}
+        carData={selectedCarData}
+        onSave={handleUpdateCar}
       />
 
       <div className="text-center mb-12">
