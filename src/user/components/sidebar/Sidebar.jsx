@@ -232,3 +232,4 @@ const Sidebar = ({ cars, setCars, setTotalPages, setCurrentPage, isMenu, setIsMe
 };
 
 export default Sidebar;
+
