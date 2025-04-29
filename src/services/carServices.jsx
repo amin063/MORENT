@@ -1,4 +1,18 @@
 import { api } from "../api"
+import axios from "axios";
+
+export const updateCar = async (carId, updatedCarData) => {
+  try {
+    const response = await axios.put(
+      `https://morentapi.onrender.com/api/cars/${carId}`,
+      updatedCarData
+    );
+    return response.data.updatedCar;
+  } catch (error) {
+    console.error("Error updating car:", error);
+    throw error;
+  }
+};
 
 export const getCars = async (currentPage) => {
     try {
@@ -88,3 +102,4 @@ export const withdrawalCar = async (_id) => {
         return error.response
     }
 }
+

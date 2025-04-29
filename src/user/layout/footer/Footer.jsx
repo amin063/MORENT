@@ -9,7 +9,7 @@ function Footer() {
     },
     {
       name: "Community",
-      links: ["Blog", "FAQ", "Invite a friend"],
+      links: ["Baku Rental", "FAQ", "Invite a friend"],
     },
     {
       name: "Socials",
@@ -60,9 +60,9 @@ function Footer() {
                     >
                       {link}
                     </Link>
-                  ) : link === "Blog" ? (
+                  ) : link === "Baku Rental" ? (
                     <Link
-                      to="/blog"
+                      to="/baku"
                       className="text-gray-500 hover:text-blue-600 transition"
                     >
                       {link}

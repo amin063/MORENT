@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { updateAdmin } from "../../../services/adminServices";
 
 const Settings = () => {
   const [data, setData] = useState({ username: "", password: "" });
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleInput = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -12,18 +14,23 @@ const Settings = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-
+  
     if (!data.username || !data.password) {
       setErrorMessage("Both username and password are required.");
       return;
     }
-
+  
     try {
       const res = await updateAdmin(data);
       console.log(res);
-      if (res.success) {
+      if (res.status === 200) {
         setMessage("Changes saved successfully!");
         setErrorMessage("");
+        setData({ username: "", password: "" });
+  
+        setTimeout(() => {
+          navigate("/admin-login");
+        }, 1500); // 1.5 saniyə gözləyir ki, mesajı istifadəçi görə bilsin
       } else {
         setMessage("");
         setErrorMessage("Failed to update admin details. Please try again.");
@@ -33,6 +40,7 @@ const Settings = () => {
       setErrorMessage("An error occurred. Please try again later.");
     }
   };
+  
 
   return (
     <div className="h-[100%] bg-gradient-to-r from-blue-50 via-white to-blue-100 flex items-center justify-center">

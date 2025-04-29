@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaHome, FaCar, FaPlusCircle, FaCalendar, FaCog, FaWallet } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { logoutAdmin } from "../../../services/adminServices";
 
 const Sidebar = () => {
-  const [activePage, setActivePage] = useState("Dashboard");
+  const [activePage, setActivePage] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();  // useLocation hook'u
 
   const menuItems = [
     { name: "Dashboard", icon: <FaHome />, path: "/admin" },
@@ -15,13 +16,20 @@ const Sidebar = () => {
     { name: "Calendar", icon: <FaCalendar />, path: "/admin/calendar" },
   ];
   
-
   const preferenceItems = [
     { name: "Settings", icon: <FaCog />, path: "/admin/settings" },
   ];
 
+  // Sayfa yüklendiğinde aktif sayfayı belirlemek
+  useEffect(() => {
+    const active = menuItems.find(item => item.path === location.pathname) 
+      ? location.pathname 
+      : preferenceItems.find(item => item.path === location.pathname)?.path;
+    setActivePage(active || "");  // Sayfa yüklendiğinde aktif olan sayfayı ayarla
+  }, [location.pathname]);  // Sayfa değiştiğinde bu effect çalışacak
+
   const handleNavigation = (name, path) => {
-    setActivePage(name);
+    setActivePage(path);  // Sayfa değiştiğinde aktif sayfayı güncelle
     navigate(path);
   };
 
@@ -31,7 +39,6 @@ const Sidebar = () => {
     console.log(res);
     window.location.reload(); // Sayfayı yenile
   };
-  
 
   return (
     <div className="w-[250px] h-screen bg-white shadow-lg flex flex-col justify-between p-4">
@@ -44,7 +51,7 @@ const Sidebar = () => {
               key={item.name}
               onClick={() => handleNavigation(item.name, item.path)}
               className={`flex items-center space-x-3 cursor-pointer rounded-lg px-4 py-3 transition duration-300 
-                ${activePage === item.name ? "bg-blue-600 text-white" : "hover:bg-blue-600 hover:text-white"}`}
+                ${activePage === item.path ? "bg-blue-600 text-white" : "hover:bg-blue-600 hover:text-white"}`}
             >
               <span className="text-lg">{item.icon}</span>
               <span className="text-sm font-medium">{item.name}</span>
@@ -62,7 +69,7 @@ const Sidebar = () => {
               key={item.name}
               onClick={() => handleNavigation(item.name, item.path)}
               className={`flex items-center space-x-3 cursor-pointer rounded-lg px-4 py-3 transition duration-300 
-                ${activePage === item.name ? "bg-blue-600 text-white" : "hover:bg-blue-600 hover:text-white"}`}
+                ${activePage === item.path ? "bg-blue-600 text-white" : "hover:bg-blue-600 hover:text-white"}`}
             >
               <span className="text-lg">{item.icon}</span>
               <span className="text-sm font-medium">{item.name}</span>

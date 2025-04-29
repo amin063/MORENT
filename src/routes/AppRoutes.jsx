@@ -24,7 +24,7 @@ import NotFound from "../user/pages/notFound/notFound";
 import Faq from "../user/pages/faq/Faq";
 import HowItWorks from "../user/pages/howitworks/howworks";
 import Featured from "../user/pages/futured/futured";
-import Blog from "../user/pages/blog/blog";
+import BakuRentalPage from "../user/pages/blog/BakuRentalPage";
 
 function AppRoutes() {
     return (
@@ -39,7 +39,7 @@ function AppRoutes() {
                 <Route path='contact' element={<Contact />} />
                 <Route path='how' element={<HowItWorks />} />
                 <Route path="/event" element={<Featured />} />
-                <Route path="/blog" element={<Blog />} />
+                <Route path="/baku" element={<BakuRentalPage />} />
                 <Route path='faq' element={<Faq />} />
             </Route>
             <Route path="/login" element={<Login />} />
