@@ -48,7 +48,7 @@ const Navbar = () => {
             </p>
           </div>
 
-          <div className="absolute top-full right-0 w-48 bg-white shadow-lg rounded-lg mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+          <div className="absolute z-50 top-full right-0 w-48 bg-white shadow-lg rounded-lg mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
             <div className="flex flex-col p-2">
               {user && (
                 <>
