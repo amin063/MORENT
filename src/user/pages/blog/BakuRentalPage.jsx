@@ -10,20 +10,29 @@ const BakuRentalPage = () => {
   return (
     <div className="bg-[#F2F5FF] text-[#1A202C]">
       {/* Hero Section */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden rounded-b-3xl shadow-md">
-        <img src={bakuHero} alt="Baku City" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-4xl md:text-5xl font-bold">Discover Baku with MORENT</h1>
-          <p className="mt-4 text-lg">Your journey begins in the heart of Azerbaijan 🇦🇿</p>
+      <section className="relative aspect-[16/9] md:aspect-[21/9] lg:aspect-[24/9] w-full overflow-hidden rounded-b-3xl shadow-xl">
+        <img
+          src={bakuHero}
+          alt="Baku City"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent backdrop-blur-sm"></div>
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg">
+            Discover Baku with <span className="text-blue-400">MORENT</span>
+          </h1>
+          <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl drop-shadow-sm">
+            Your journey begins in the heart of Azerbaijan 🇦🇿
+          </p>
         </div>
       </section>
+
 
       {/* About Section */}
       <section className="max-w-6xl mx-auto py-10 px-6">
         <h2 className="text-3xl font-semibold mb-3 text-[#3563E9]">Why Baku?</h2>
         <p className="text-[#64748B] leading-relaxed">
-          MORENT operates exclusively in Baku to provide you with the best car rental experience in Azerbaijan's vibrant capital. 
+          MORENT operates exclusively in Baku to provide you with the best car rental experience in Azerbaijan's vibrant capital.
           From modern architecture to historical landmarks, explore every corner of Baku with comfort and style.
         </p>
       </section>

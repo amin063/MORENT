@@ -183,53 +183,58 @@ const Dashboard = () => {
       </div>
 
       {/* Car Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filteredCars.length > 0 ? (
           filteredCars.map((car) => (
             <div
               key={car._id}
-              className="bg-white rounded-xl shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-xl relative overflow-hidden"
+              className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
             >
-              <button
-                onClick={() => handleDeleteClick(car._id)}
-                className="absolute top-4 right-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors duration-300"
-              >
-                Delete
-              </button>
-              <button
-                onClick={() => handleEditClick(car)}
-                className="absolute top-16 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-              >
-                Edit
-              </button>
-
-              <div className="w-full h-48 sm:h-64 bg-gray-200 flex items-center justify-center overflow-hidden rounded-t-lg">
+              {/* Car Image */}
+              <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
                 <img
                   src={car.img}
                   alt={car.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
+                {/* Action Buttons */}
+                <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <button
+                    onClick={() => handleEditClick(car)}
+                    className="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm hover:bg-blue-700 shadow"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDeleteClick(car._id)}
+                    className="bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm hover:bg-red-700 shadow"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-              <div className="p-6">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-3">
+
+              {/* Car Info */}
+              <div className="p-4 flex flex-col gap-2">
+                <h3 className="text-lg font-semibold text-gray-900 truncate">
                   {car.name}
-                </h2>
-                <p className="text-gray-600 mb-4">
+                </h3>
+                <p className="text-sm text-gray-500 line-clamp-2">
                   {car.desc || "No description available."}
                 </p>
-                <div className="flex items-baseline mb-4">
-                  <span className="text-2xl font-semibold text-gray-900">
-                    ${car.price}
-                  </span>
-                  <span className="text-sm text-gray-500 ml-2">/ day</span>
-                </div>
-                <div className="flex items-center justify-between">
+
+                <div className="flex items-center justify-between mt-2">
+                  <div>
+                    <span className="text-xl font-bold text-gray-800">
+                      ${car.price}
+                    </span>
+                    <span className="text-sm text-gray-500">/day</span>
+                  </div>
                   <div className="flex items-center gap-2">
-                    <div
-                      className={`w-3 h-3 rounded-full ${
-                        car.rentDetails ? "bg-green-500" : "bg-red-500"
-                      }`}
-                    ></div>
+                    <span
+                      className={`w-3 h-3 rounded-full ${car.rentDetails ? "bg-green-500" : "bg-red-500"
+                        }`}
+                    ></span>
                     <span className="text-sm text-gray-600">
                       {car.rentDetails ? "Rented" : "Available"}
                     </span>
@@ -239,11 +244,12 @@ const Dashboard = () => {
             </div>
           ))
         ) : (
-          <div className="text-center text-gray-600 py-6">
+          <div className="text-center text-gray-600 py-6 col-span-full">
             No cars found matching your search.
           </div>
         )}
       </div>
+
     </div>
   );
 };

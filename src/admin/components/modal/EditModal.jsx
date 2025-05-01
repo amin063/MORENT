@@ -36,10 +36,10 @@ const EditModal = ({ isOpen, onClose, carData, onSave }) => {
               name="name"
               value={formData.name || ''}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 border p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700">Description</label>
             <textarea
@@ -47,7 +47,7 @@ const EditModal = ({ isOpen, onClose, carData, onSave }) => {
               value={formData.desc || ''}
               onChange={handleChange}
               rows="3"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 border p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
 
@@ -58,18 +58,7 @@ const EditModal = ({ isOpen, onClose, carData, onSave }) => {
               name="price"
               value={formData.price || ''}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Image URL</label>
-            <input
-              type="text"
-              name="img"
-              value={formData.img || ''}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 border p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
 

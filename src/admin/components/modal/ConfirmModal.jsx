@@ -17,7 +17,7 @@ const ConfirmModal = ({ isOpen, onClose, onConfirm, title, message }) => {
                             onClick={onClose}
                             className="px-4 py-2 text-gray-600 hover:text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200"
                         >
-                            Ləğv et
+                            Cancel
                         </button>
                     )}
                     <button 
@@ -27,7 +27,7 @@ const ConfirmModal = ({ isOpen, onClose, onConfirm, title, message }) => {
                             : 'bg-red-500 hover:bg-red-600'} 
                             text-white rounded-lg transition-colors duration-200`}
                     >
-                        {isError ? 'Bağla' : 'Sil'}
+                        OK
                     </button>
                 </div>
             </div>
